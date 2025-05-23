@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Atou's Profile~</title>
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .main-wrapper {
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+      border: 2px solid #cc0000;
+    }
+
+    .profile-photo img {
+      width: 111px;
+      height: auto;
+      display: block;
+      margin: 0 auto 20px;
+      border-radius: 10px;
+    }
+
+    .profile-info {
+      font-size: 16px;
+      text-align: left;
+      padding-left: 10px;
+    }
+
+    .profile-info strong {
+      display: inline-block;
+      width: 80px;
+    }
+
+    .about {
+      margin-top: 20px;
+      text-align: left;
+      padding-left: 10px;
+    }
+
+    .chat-widgets {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .chat-box {
+      position: relative;
+      border: 2px solid #cc0000;
+      border-radius: 10px;
+      overflow: hidden;
+      width: 250px;
+      height: 350px;
+      background: #ffffff;
+    }
+
+    .chat-box .close-btn {
+      position: absolute;
+      top: 4px;
+      right: 6px;
+      background: #cc0000;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      cursor: pointer;
+      line-height: 20px;
+      text-align: center;
+      font-size: 16px;
+      z-index: 10;
+      opacity: 0.8;
+      transition: opacity 0.2s ease;
+    }
+
+    .chat-box .close-btn:hover {
+      opacity: 1;
+    }
+
+    .floating-window {
+      position: fixed;
+      border: 2px solid #cc0000;
+      border-radius: 10px;
+      background: #fff;
+      z-index: 999;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      overflow: hidden;
+      transform-origin: center;
+    }
+
+    .floating-header {
+      display: flex;
+      background: #cc0000;
+      color: white;
+      padding: 5px;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    .floating-header input {
+      width: 180px;
+      font-size: 12px;
+    }
+
+    .floating-header button {
+      background: white;
+      color: #cc0000;
+      border: none;
+      padding: 4px 6px;
+      margin-left: 5px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .floating-iframe {
+      width: 100%;
+      height: calc(100% - 32px);
+      border: none;
+    }
+
+    .show-youtube-btn, #showChatBtn, #showFriendBtn {
+      position: fixed;
+      background: #cc0000;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 8px 12px;
+      cursor: pointer;
+      display: none;
+      z-index: 998;
+    }
+
+    #showBtn {
+      top: 20px;
+      right: 20px;
+      display: none;
+    }
+
+    #showChatBtn {
+      top: 330px;
+      right: 20px;
+    }
+
+    #showFriendBtn {
+      top: 20px;
+      left: 20px;
+    }
+
+    #chatWindow {
+      top: 340px !important;
+      right: 20px !important;
+      width: 400px !important;
+      height: 100px !important;
+    }
+
+    #ytWindow {
+      top: 20px;
+      right: 20px;
+      width: 400px;
+      height: 300px;
+    }
+
+    #friendWindow {
+      top: 20px;
+      left: 20px;
+      width: 200px;
+      height: auto;
+    }
+
+    #friendList {
+      padding: 10px;
+      font-size: 14px;
+      line-height: 1.6;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .friend {
+      text-align: center;
+    }
+
+    .friend .box {
+      width: 50px;
+      height: 50px;
+      border: 2px solid #cc0000;
+      border-radius: 5px;
+      object-fit: cover;
+      display: block;
+      margin: auto;
+    }
+
+    .friend span {
+      display: block;
+      margin-top: 4px;
+      font-size: 12px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+<div class="main-wrapper">
+  <div class="container">
+    <div class="profile-photo">
+      <img src="https://media.discordapp.net/attachments/775007737016746004/1374735013467394119/full.png?ex=68311b80&is=682fca00&hm=7d47875e9e6b338707c4034763e1a90a117b466f1eb5856284d78e35f033f2e4&=&format=webp&quality=lossless&width=311&height=415" alt="Profile Photo">
+    </div>
+    <div class="profile-info">
+      <p><strong>Age:</strong> 0</p>
+      <p><strong>Gender:</strong> Male</p>
+      <p><strong>Location:</strong> Soviet Union</p>
+    </div>
+    <div class="about">
+      <strong>About Atou:</strong>
+      <p>𝕿𝖚𝖇𝖚 - odei no atou</p>
+      <p><a href="https://mynoghra.chatango.com/" target="_blank">https://mynoghra.chatango.com/</a></p>
+    </div>
+  </div>
+
+  <div class="chat-widgets" id="chatWidgets"></div>
+</div>
+
+<!-- YouTube -->
+<div class="floating-window" id="ytWindow">
+  <div class="floating-header">
+    <span>YouTube Search:</span>
+    <input type="text" id="ytInput" placeholder="Search YouTube..." />
+    <button onclick="rotateWindow()">⟳</button>
+    <button onclick="changeURL()">Go</button>
+    <button onclick="hideWindow()">✖</button>
+  </div>
+  <iframe src="https://www.youtube.com/embed/5wTK6_kaPvU" class="floating-iframe" id="ytFrame" allowfullscreen></iframe>
+</div>
+<button class="show-youtube-btn" id="showBtn" onclick="showWindow()">Show YouTube</button>
+
+<!-- Chat Input -->
+<div class="floating-window" id="chatWindow">
+  <div class="floating-header">
+    <span>Chatango Chatroom:</span>
+    <input type="text" id="chatInput" placeholder="Enter chat name..." />
+    <button onclick="addChat()">Add Chat</button>
+    <button onclick="hideChatWindow()">✖</button>
+  </div>
+</div>
+<button class="show-youtube-btn" id="showChatBtn" onclick="showChatWindow()">Show Chat Input</button>
+
+<!-- Friend List -->
+<div class="floating-window" id="friendWindow">
+  <div class="floating-header">
+    <span>Friends</span>
+    <button onclick="hideFriendWindow()">✖</button>
+  </div>
+  <div id="friendList">
+    <div class="friend"><img class="box" src="https://media.discordapp.net/attachments/775007737016746004/1375354380378837032/full.png?ex=68316215&is=68301095&hm=b68794f728d22de63fc13f8837c1c545a87edc0c4bcc2e9ef501c6df7a5772c2&=&format=webp&quality=lossless&width=63&height=63" alt="Tubu"><span>Tubu</span></div>
+    <div class="friend"><img class="box" src="https://media.discordapp.net/attachments/775007737016746004/1375355862608121968/thumb.png?ex=68316376&is=683011f6&hm=d0325cdf9e35c54682cb038f064ae7e9c8348f35c01e038dd806fdaaa1a8ed4a&=&format=webp&quality=lossless&width=63&height=63" alt="Agung"><span>Agung</span></div>
+    <div class="friend"><img class="box" src="https://media.discordapp.net/attachments/775007737016746004/1375355431081476156/thumb.png?ex=6831630f&is=6830118f&hm=14981b6213c7e92c56ef58f6ead0348c36b8e22d394813fe6e0506091f0a6475&=&format=webp&quality=lossless&width=63&height=63" alt="Cheese"><span>Cheese</span></div>
+    <div class="friend"><img class="box" src="https://media.discordapp.net/attachments/775007737016746004/1375356281413566526/thumb.png?ex=683163da&is=6830125a&hm=3458c0a6e65b30d23ff8f6750470c91a6d8ae758dae4c00830f8bddb608d9e90&=&format=webp&quality=lossless&width=63&height=63" alt="Eg"><span>Eg</span></div>
+    <div class="friend"><img class="box" src="https://media.discordapp.net/attachments/775007737016746004/1375356592563818506/thumb.png?ex=68316424&is=683012a4&hm=213d7a237de8ea1e6842f8bdff20b6338b410bd044ff61edfc0a02bc72e07b68&=&format=webp&quality=lossless&width=63&height=63" alt="Vf"><span>Vf</span></div>
+    <div class="friend"><img class="box" src="https://media.discordapp.net/attachments/775007737016746004/1375357144408526938/thumb.png?ex=683164a8&is=68301328&hm=6a3d18a20019bcd22c6749d64016aa21caae8523a243015d7e63968ee3f4674d&=&format=webp&quality=lossless&width=63&height=63" alt="Ulnuh"><span>Ulnuh</span></div>
+    <div class="friend"><img class="box" src="https://media.discordapp.net/attachments/775007737016746004/1375357387346677830/thumb.png?ex=683164e2&is=68301362&hm=3548655f27d0c4a80ed1f56f3374012db7ad9095f09dc3712035a206898a6e8a&=&format=webp&quality=lossless&width=63&height=63" alt="Sapekador"><span>Sapekador</span></div>
+  </div>
+</div>
+<button id="showFriendBtn" onclick="showFriendWindow()">Show Friends</button>
+
+<script>
+  let angle = 0;
+  function hideWindow() {
+    ytWindow.style.display = "none";
+    showBtn.style.display = "block";
+  }
+  function showWindow() {
+    ytWindow.style.display = "block";
+    showBtn.style.display = "none";
+  }
+  function rotateWindow() {
+    angle = (angle + 90) % 360;
+    ytWindow.style.transform = `rotate(${angle}deg)`;
+  }
+  async function changeURL() {
+    const input = ytInput.value.trim();
+    if (!input) return alert("Masukkan kata kunci pencarian YouTube.");
+    try {
+      const res = await fetch(`https://toxicdevilapi.vercel.app/search/youtube?query=${encodeURIComponent(input)}`);
+      const data = await res.json();
+      if (data?.result?.length > 0) {
+        ytFrame.src = `https://www.youtube.com/embed/${data.result[0].id}`;
+      } else {
+        alert("Video tidak ditemukan.");
+      }
+    } catch (error) {
+      alert("Gagal memuat video dari API.");
+    }
+  }
+
+  const defaultSettings = {
+    a: "cc0000", b: 100, c: "FFFFFF", d: "FFFFFF", k: "cc0000", l: "cc0000",
+    m: "cc0000", n: "FFFFFF", q: "cc0000", r: 100, fwtickm: 1
+  };
+  const graySettings = { ...defaultSettings, a: "404040", c: "c0c0c0", d: "c0c0c0", k: "990000" };
+  const blackSettings = { ...defaultSettings, a: "000000", c: "ffffff", d: "ffffff" };
+
+  function createChatElement(chatname, settings, idSuffix) {
+    const div = document.createElement("div");
+    div.className = "chat-box";
+
+    const closeBtn = document.createElement("button");
+    closeBtn.className = "close-btn";
+    closeBtn.title = "Hapus chat";
+    closeBtn.innerHTML = "×";
+    closeBtn.onclick = () => div.remove();
+    div.appendChild(closeBtn);
+
+    const script = document.createElement("script");
+    script.id = "cid" + String(idSuffix).padStart(19, '0');
+    script.setAttribute("data-cfasync", "false");
+    script.async = true;
+    script.src = "//st.chatango.com/js/gz/emb.js";
+    script.style.width = "250px";
+    script.style.height = "350px";
+    script.textContent = JSON.stringify({
+      handle: chatname,
+      arch: "js",
+      styles: settings
+    });
+
+    div.appendChild(script);
+    return div;
+  }
+
+  function initChats() {
+    const url = window.location.href;
+    const chatWidgets = document.getElementById("chatWidgets");
+    const rawData = url.split("?");
+    if (rawData.length < 2) return;
+
+    const chatData = rawData[1].split(",");
+    chatData.forEach((entry, i) => {
+      let chatname = entry, settings = defaultSettings;
+      if (entry.includes("!")) [chatname] = entry.split("!"), settings = graySettings;
+      else if (entry.includes("$")) [chatname] = entry.split("$"), settings = blackSettings;
+      const chatEl = createChatElement(chatname, settings, i);
+      chatWidgets.appendChild(chatEl);
+    });
+  }
+
+  window.onload = initChats;
+
+  function hideChatWindow() {
+    chatWindow.style.display = "none";
+    showChatBtn.style.display = "block";
+  }
+  function showChatWindow() {
+    chatWindow.style.display = "block";
+    showChatBtn.style.display = "none";
+  }
+
+  function addChat() {
+    const input = chatInput.value.trim();
+    if (!input) return alert("Masukkan nama chatroom Chatango.");
+    const chatWidgets = document.getElementById("chatWidgets");
+    const exists = Array.from(chatWidgets.querySelectorAll("script")).some(s => {
+      try {
+        const cfg = JSON.parse(s.textContent);
+        return cfg.handle.toLowerCase() === input.toLowerCase();
+      } catch {
+        return false;
+      }
+    });
+    if (exists) return alert("Chatroom sudah ada.");
+    chatWidgets.appendChild(createChatElement(input, defaultSettings, Date.now()));
+    chatInput.value = "";
+  }
+
+  function hideFriendWindow() {
+    friendWindow.style.display = "none";
+    showFriendBtn.style.display = "block";
+  }
+
+  function showFriendWindow() {
+    friendWindow.style.display = "block";
+    showFriendBtn.style.display = "none";
+  }
+</script>
+
+</body>
+</html>
