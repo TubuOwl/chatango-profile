@@ -4,31 +4,22 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   let name;
+  let cookie = document.cookie;
+
   try {
-    let found = document.cookie.match(/id\.chatango\.com=([^;]+)/);
+    let found = cookie.match(/id\.chatango\.com=([^;]+)/);
     let user = found ? found[1] : null;
     name = user.charAt(0).toUpperCase() + user.slice(1);
   } catch {
     name = "Anon" + rand(1000, 9999);
   }
 
-  const payload = {
+  let history = JSON.parse(localStorage.getItem("history")) || [];
+  history.push({
     username: name,
     timestamp: new Date().toISOString()
-  };
-
-  fetch("/history", { 
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(payload)
-  })
-  .then(res => res.json())
-  .then(data => {
-    console.log("Tersimpan:", data);
-  })
-  .catch(err => {
-    console.error("Gagal simpan:", err);
   });
+
+  localStorage.setItem("history", JSON.stringify(history));
+  console.log("User history updated:", history);
 });
