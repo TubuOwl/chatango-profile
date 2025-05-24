@@ -15,9 +15,6 @@ function start() {
   } catch {
     name = "Anon" + rand(1000, 9999);
   }
-
-  document.getElementById("user").textContent = name;
-
   // Ambil history lama dari localStorage (atau array kosong kalau belum ada)
   let history = JSON.parse(localStorage.getItem("history")) || [];
 
