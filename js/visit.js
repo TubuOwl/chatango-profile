@@ -3,21 +3,23 @@ window.addEventListener("DOMContentLoaded", () => {
     return Math.floor(Math.random() * (max - min)) + min;
   }
 
-  // Generate a random session ID
-  function generateSessionId() {
-    return Date.now().toString() + rand(1000, 9999);
-  }
-
-  // Get existing cookies
+  // Ambil session ID dari cookie st.chatango.com
   let cookies = document.cookie;
-  let sessionMatch = cookies.match(/session_id=([^;]+)/);
-  let sessionId = sessionMatch ? sessionMatch[1] : generateSessionId();
+  let sessionId;
 
-  // If session_id didn't exist, set it
-  if (!sessionMatch) {
-    document.cookie = `session_id=${sessionId}; path=/; max-age=31536000; SameSite=Lax`;
+  try {
+    let match = cookies.match(/st\.chatango\.com=sessionid_(\d+)/);
+    if (match) {
+      sessionId = match[1];
+
+      // Set session_id cookie jika ditemukan dari st.chatango.com
+      document.cookie = `session_id=${sessionId}; path=/; max-age=31536000; SameSite=Lax`;
+    }
+  } catch (e) {
+    console.warn("Gagal membaca cookie st.chatango.com");
   }
 
+  // Ambil username dari id.chatango.com jika ada, jika tidak anon
   let name;
   try {
     let found = cookies.match(/id\.chatango\.com=([^;]+)/);
@@ -27,10 +29,11 @@ window.addEventListener("DOMContentLoaded", () => {
     name = "Anon" + rand(1000, 9999);
   }
 
+  // Simpan ke localStorage history
   let history = JSON.parse(localStorage.getItem("history")) || [];
   history.push({
     username: name,
-    session_id: sessionId,
+    session_id: sessionId || null,
     timestamp: new Date().toISOString()
   });
 
