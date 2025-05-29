@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(to right, rgba(255, 0, 0, 0), rgba(255, 0, 0, 1));
+  background: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
   display: flex;
   justify-content: center;
   padding: 20px;
@@ -94,7 +94,7 @@ body {
   border-radius: 10px;
   background: #fff;
   z-index: 999;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   overflow: hidden;
   transform-origin: center;
 }
@@ -130,9 +130,7 @@ body {
   border: none;
 }
 
-.show-youtube-btn,
-#showChatBtn,
-#showFriendBtn {
+.show-youtube-btn, #showChatBtn, #showFriendBtn {
   position: fixed;
   background: #cc0000;
   color: white;
