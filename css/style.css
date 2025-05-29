@@ -230,12 +230,12 @@ body {
 .friend .box {
   width: 50px;
   height: 50px;
-  border: 2px solid white; /* Default awal */
+  border: 2px solid white; 
   border-radius: 5px;
   object-fit: cover;
   display: block;
   margin: auto;
-  animation: borderPulse 2s infinite; /* Animasi border */
+  animation: borderPulse 2s infinite; 
 }
 
 .friend span {
@@ -250,7 +250,7 @@ body {
       left: 20px;
       width: 400px;
       height: 600px;
-      border: 2px solid #cc0000;
+      border: 2px solid #808080;
       border-radius: 10px;
       background: white;
       z-index: 1000;
@@ -261,7 +261,7 @@ body {
       position: fixed;
       top: 340px;
       left: 20px;
-      background: #cc0000;
+      background: #808080;
       color: white;
       border: none;
       border-radius: 5px;
@@ -275,7 +275,7 @@ body {
       background: #ff4d4d;
     }
     #blackjackWindow > .floating-header {
-      background-color: #cc0000;
+      background-color: #808080;
       color: white;
       padding: 8px 12px;
       font-weight: bold;
