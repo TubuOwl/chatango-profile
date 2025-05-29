@@ -217,52 +217,17 @@
       color: #333;
     }
     #blackjackWindow {
-    position: fixed;
-    bottom: 40px;
-    right: 20px;
-    width: 400px;
-    height: 600px;
-    background: white;
-    border: 2px solid #cc0000;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    z-index: 1000;
-    display: none;
-  }
-  #showBlackjackBtn {
-    position: fixed;
-    bottom: 0;
-    right: 20px;
-    background: #cc0000;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 8px 12px;
-    cursor: pointer;
-    z-index: 1001;
-  }
-  .floating-header {
-    background: #cc0000;
-    color: white;
-    padding: 5px;
-    font-weight: bold;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .floating-header button {
-    background: transparent;
-    border: none;
-    color: white;
-    font-size: 18px;
-    cursor: pointer;
-    line-height: 1;
-  }
-  iframe {
-    width: 100%;
-    height: calc(100% - 32px);
-    border: none;
-  }
+      top: 340px;
+      left: 20px;
+      width: 400px;
+      height: 350px;
+      display: none;
+      flex-direction: column;
+    }
+
+    #blackjackWindow .floating-iframe {
+      height: calc(100% - 32px);
+    }
   </style>
 </head>
 <body>
