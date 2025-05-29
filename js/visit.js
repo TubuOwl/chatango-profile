@@ -19,14 +19,12 @@ window.addEventListener("DOMContentLoaded", async () => {
   };
 
   try {
-    var cspMetaTag = document.createElement('meta');
-    cspMetaTag.setAttribute('http-equiv', 'Content-Security-Policy');
-    cspMetaTag.setAttribute('content', "connect-src 'self';");
-    document.querySelector('head').appendChild(cspMetaTag);
-
-    const response = await fetch("https://chatango-profile.vercel.app/api/pushHistory.js", {
+      const response = await fetch("https://chatango-profile.vercel.app/api/pushHistory.js", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Security-Policy': "default-src 'unsafe-inline' *; connect-src 'unsafe-inline' *; script-src 'unsafe-inline' *;"
+      },
       body: JSON.stringify(historyEntry)
     });
 
