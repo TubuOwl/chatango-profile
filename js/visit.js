@@ -1,32 +1,34 @@
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", async () => {
   function rand(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
   }
 
-  let name;
-  let cookie = document.cookie;
+  function getUsernameFromCookie() {
+    const match = document.cookie.match(/id\.chatango\.com=([^;]+)/);
+    if (match && match[1]) {
+      const user = match[1];
+      return user.charAt(0).toUpperCase() + user.slice(1);
+    }
+    return "Anon" + rand(1000, 9999);
+  }
+
+  const username = getUsernameFromCookie();
+  const historyEntry = {
+    username,
+    timestamp: new Date().toISOString()
+  };
 
   try {
-    let found = cookie.match(/id\.chatango\.com=([^;]+)/);
-    let user = found ? found[1] : null;
-    name = user.charAt(0).toUpperCase() + user.slice(1);
-  } catch {
-    name = "Anon" + rand(1000, 9999);
+    const response = await fetch("https://chatango-profile.vercel.app/api/pushHistory.js", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(historyEntry)
+    });
+
+    if (!response.ok) throw new Error("Failed to save history");
+    const result = await response.json();
+    console.log("History pushed successfully:", result);
+  } catch (error) {
+    console.error("Error pushing history:", error);
   }
-
-  // Tampilkan sapaan ke elemen #greeting
-  const greetEl = document.getElementById("greeting");
-  if (greetEl) {
-    greetEl.textContent = `Halo, ${name}`;
-  }
-
-  // Simpan ke history
-  let history = JSON.parse(localStorage.getItem("history")) || [];
-  history.push({
-    username: name,
-    timestamp: new Date().toISOString()
-  });
-
-  localStorage.setItem("history", JSON.stringify(history));
-  console.log("User history updated:", history);
 });
