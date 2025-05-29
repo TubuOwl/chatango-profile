@@ -1,4 +1,7 @@
-/* # YOUTUBE WINDOW # */
+/* ################################################################ */
+/* # YOUTUBE WINDOW ################################################ */
+/* ################################################################ */
+
 let angle = 0;
 
 function hideWindow() {
@@ -32,7 +35,10 @@ async function changeURL() {
   }
 }
 
-/* # CHATROOM / CHATBOX # */
+/* ################################################################ */
+/* # CHATROOM / CHATBOX ########################################### */
+/* ################################################################ */
+
 const defaultSettings = {
   a: "cc0000", b: 100, c: "FFFFFF", d: "FFFFFF", k: "cc0000", l: "cc0000",
   m: "cc0000", n: "FFFFFF", q: "cc0000", r: 100, fwtickm: 1
@@ -68,7 +74,7 @@ function createChatElement(chatname, settings, idSuffix) {
   return div;
 }
 
-function initChatsFromURL() {
+function initChats() {
   const url = window.location.href;
   const chatWidgets = document.getElementById("chatWidgets");
   const rawData = url.split("?");
@@ -83,6 +89,8 @@ function initChatsFromURL() {
     chatWidgets.appendChild(chatEl);
   });
 }
+
+window.onload = initChats;
 
 function hideChatWindow() {
   chatWindow.style.display = "none";
@@ -111,7 +119,10 @@ function addChat() {
   chatInput.value = "";
 }
 
-/* # FRIEND LIST # */
+/* ################################################################ */
+/* # FRIEND LIST ################################################## */
+/* ################################################################ */
+
 function hideFriendWindow() {
   friendWindow.style.display = "none";
   showFriendBtn.style.display = "block";
@@ -122,7 +133,14 @@ function showFriendWindow() {
   showFriendBtn.style.display = "none";
 }
 
-/* # BLACKJACK # */
+/* ################################################################ */
+/* # BLACKJACK #################################################### */
+/* ################################################################ */
+
+const blackjackWindow = document.getElementById("blackjackWindow");
+const showBlackjackBtn = document.getElementById("showBlackjackBtn");
+const bgMusic = document.getElementById("bgMusic");
+
 function hideBlackjackWindow() {
   blackjackWindow.style.display = "none";
   showBlackjackBtn.style.display = "block";
@@ -133,23 +151,7 @@ function hideBlackjackWindow() {
 function showBlackjackWindow() {
   blackjackWindow.style.display = "block";
   showBlackjackBtn.style.display = "none";
-  bgMusic.play().catch(err => console.warn("Autoplay failed:", err));
+  bgMusic.play().catch(err => {
+    console.warn("Autoplay failed:", err);
+  });
 }
-
-/* # INITIALIZATION ON LOAD # */
-window.onload = () => {
-  // Inisialisasi elemen-elemen
-  ytWindow.style.display = "none";
-  showBtn.style.display = "block";
-
-  chatWindow.style.display = "none";
-  showChatBtn.style.display = "block";
-
-  friendWindow.style.display = "none";
-  showFriendBtn.style.display = "block";
-
-  blackjackWindow.style.display = "none";
-  showBlackjackBtn.style.display = "block";
-
-  initChatsFromURL();
-};
