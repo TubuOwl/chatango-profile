@@ -8,7 +8,7 @@ body {
   display: flex;
   justify-content: center;
   padding: 20px;
-  min-height: 100vh; /* Tambahan agar tinggi body minimal setinggi viewport */
+  min-height: 100vh;
 }
 
 .main-wrapper {
@@ -21,13 +21,12 @@ body {
   margin: auto;
   padding: 20px;
   border-radius: 10px;
-  border: 2px solid rgba(255, 255, 255, 0.2); /* semi-transparent border */
-  background: rgba(255, 255, 255, 0.05);      /* lebih transparan */
-  backdrop-filter: blur(10px);               /* lebih blur agar efek frosted lebih kuat */
-  -webkit-backdrop-filter: blur(10px);       /* untuk dukungan Safari */
+  border: 2px solid rgba(255, 255, 255, 0.2); 
+  background: transparent; 
   background-clip: padding-box;
   position: relative;
 }
+
 
 .profile-photo img {
   width: 111px;
