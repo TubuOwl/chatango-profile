@@ -169,9 +169,9 @@ body {
 }
 
 #chatWindow {
-  top: 340px !important;
-  right: 20px !important;
-  width: 100px !important;
+  top: 10px !important;
+  right: 10px !important;
+  width: 400px !important;
   height: 100px !important;
 }
 
