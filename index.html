@@ -217,15 +217,21 @@
       color: #333;
     }
     #blackjackWindow {
-    top: 340px;  /* posisi vertikal di bawah friendWindow */
-    left: 20px;  /* kiri sama dengan friendWindow */
+    position: fixed;
+    bottom: 40px;
+    left: 20px;
     width: 400px;
     height: 600px;
-    }
-
-    #showBlackjackBtn {
+    background: white;
+    border: 2px solid #cc0000;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    z-index: 1000;
+    display: none;
+  }
+  #showBlackjackBtn {
     position: fixed;
-    top: 950px; /* kira-kira di bawah friendWindow dan blackjackWindow */
+    bottom: 0;
     left: 20px;
     background: #cc0000;
     color: white;
@@ -233,8 +239,8 @@
     border-radius: 5px;
     padding: 8px 12px;
     cursor: pointer;
-    z-index: 998;
-    }
+    z-index: 1001;
+  }
   </style>
 </head>
 <body>
@@ -303,14 +309,15 @@
 <button id="showFriendBtn" onclick="showFriendWindow()">Show Friends</button>
 
 <!-- BlackJack Window -->
-<div class="floating-window" id="blackjackWindow" style="display:none;">
+<button id="showBlackjackBtn" onclick="showBlackjackWindow()">Show Blackjack</button>
+
+<div id="blackjackWindow">
   <div class="floating-header">
     <span>Blackjack Game</span>
     <button onclick="hideBlackjackWindow()">✖</button>
   </div>
-  <iframe src="https://brandicameron.github.io/blackjack/" class="floating-iframe" allowfullscreen></iframe>
+  <iframe src="https://brandicameron.github.io/blackjack/" allowfullscreen></iframe>
 </div>
-<button id="showBlackjackBtn" onclick="showBlackjackWindow()">Show Blackjack</button>
 
 <script>
   let angle = 0;
