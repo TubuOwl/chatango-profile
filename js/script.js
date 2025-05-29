@@ -1,3 +1,7 @@
+/* ################################################################ */
+/* # YOUTUBE WINDOW ################################################ */
+/* ################################################################ */
+
 let angle = 0;
 
 function hideWindow() {
@@ -30,6 +34,10 @@ async function changeURL() {
     alert("Gagal memuat video dari API.");
   }
 }
+
+/* ################################################################ */
+/* # CHATROOM / CHATBOX ########################################### */
+/* ################################################################ */
 
 const defaultSettings = {
   a: "cc0000", b: 100, c: "FFFFFF", d: "FFFFFF", k: "cc0000", l: "cc0000",
@@ -111,6 +119,10 @@ function addChat() {
   chatInput.value = "";
 }
 
+/* ################################################################ */
+/* # FRIEND LIST ################################################## */
+/* ################################################################ */
+
 function hideFriendWindow() {
   friendWindow.style.display = "none";
   showFriendBtn.style.display = "block";
@@ -120,21 +132,26 @@ function showFriendWindow() {
   friendWindow.style.display = "block";
   showFriendBtn.style.display = "none";
 }
+
+/* ################################################################ */
+/* # BLACKJACK #################################################### */
+/* ################################################################ */
+
 const blackjackWindow = document.getElementById("blackjackWindow");
-  const showBlackjackBtn = document.getElementById("showBlackjackBtn");
-  const bgMusic = document.getElementById("bgMusic");
+const showBlackjackBtn = document.getElementById("showBlackjackBtn");
+const bgMusic = document.getElementById("bgMusic");
 
-  function hideBlackjackWindow() {
-    blackjackWindow.style.display = "none";
-    showBlackjackBtn.style.display = "block";
-    bgMusic.pause();
-    bgMusic.currentTime = 0; // Reset to beginning
-  }
+function hideBlackjackWindow() {
+  blackjackWindow.style.display = "none";
+  showBlackjackBtn.style.display = "block";
+  bgMusic.pause();
+  bgMusic.currentTime = 0;
+}
 
-  function showBlackjackWindow() {
-    blackjackWindow.style.display = "block";
-    showBlackjackBtn.style.display = "none";
-    bgMusic.play().catch(err => {
-      console.warn("Autoplay failed:", err);
-    });
-  }
+function showBlackjackWindow() {
+  blackjackWindow.style.display = "block";
+  showBlackjackBtn.style.display = "none";
+  bgMusic.play().catch(err => {
+    console.warn("Autoplay failed:", err);
+  });
+}
