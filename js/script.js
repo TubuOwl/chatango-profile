@@ -120,4 +120,21 @@ function showFriendWindow() {
   friendWindow.style.display = "block";
   showFriendBtn.style.display = "none";
 }
+const blackjackWindow = document.getElementById("blackjackWindow");
+  const showBlackjackBtn = document.getElementById("showBlackjackBtn");
+  const bgMusic = document.getElementById("bgMusic");
 
+  function hideBlackjackWindow() {
+    blackjackWindow.style.display = "none";
+    showBlackjackBtn.style.display = "block";
+    bgMusic.pause();
+    bgMusic.currentTime = 0; // Reset to beginning
+  }
+
+  function showBlackjackWindow() {
+    blackjackWindow.style.display = "block";
+    showBlackjackBtn.style.display = "none";
+    bgMusic.play().catch(err => {
+      console.warn("Autoplay failed:", err);
+    });
+  }
