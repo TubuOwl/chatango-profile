@@ -82,11 +82,7 @@ function initChats() {
   });
 }
 
-window.onload = function () {
-  initChats();
-  document.getElementById("ytWindow").style.display = "none";
-  document.getElementById("chatWindow").style.display = "none";
-};
+window.onload = initChats;
 
 function hideChatWindow() {
   chatWindow.style.display = "none";
