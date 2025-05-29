@@ -78,7 +78,7 @@ body {
   position: absolute;
   top: 4px;
   right: 6px;
-  background: #cc0000;
+  background: #808080;
   color: white;
   font-weight: bold;
   border: none;
@@ -100,9 +100,9 @@ body {
 
 .floating-window {
   position: fixed;
-  border: 2px solid #cc0000;
+  border: 2px solid #808080;
   border-radius: 10px;
-  background: #fff;
+  background: transparent;
   z-index: 999;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   overflow: hidden;
@@ -111,7 +111,7 @@ body {
 
 .floating-header {
   display: flex;
-  background: #cc0000;
+  background: #808080;
   color: white;
   padding: 5px;
   justify-content: space-between;
@@ -126,7 +126,7 @@ body {
 
 .floating-header button {
   background: white;
-  color: #cc0000;
+  color: #808080;
   border: none;
   padding: 4px 6px;
   margin-left: 5px;
