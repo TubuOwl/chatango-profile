@@ -5,12 +5,17 @@
   <title>Atou's Profile</title>
   <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
   <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .floating-window {
+      display: none;
+    }
+  </style>
 </head>
 <body>
 
+<!-- # PROFILE UTAMA -->
 <div class="main-wrapper">
   <div class="container">
-    <!-- # PROFILE # -->
     <div class="profile-photo">
       <img src="https://ust.chatango.com/profileimg/a/t/atou/full.jpg" alt="profile-photo" referrerpolicy="no-referrer">
     </div>
@@ -22,16 +27,15 @@
     </div>
     <div class="about">
       <strong>About Atou:</strong>
-      <p>𝗣𝛢𝛫𝛢 - odei no atou</p>
+      <p>𝕿𝖚𝖇𝖚 - odei no atou</p>
       <p><a href="https://mynoghra.chatango.com/" target="_blank">https://mynoghra.chatango.com/</a></p>
     </div>
   </div>
-  
-  <!-- # CHATROOMS # -->
+
   <div class="chat-widgets" id="chatWidgets"></div>
 </div>
 
-<!-- # YOUTUBE # -->
+<!-- # YOUTUBE -->
 <div class="floating-window" id="ytWindow">
   <div class="floating-header">
     <span>YouTube Search:</span>
@@ -44,7 +48,7 @@
 </div>
 <button class="show-youtube-btn" id="showBtn" onclick="showWindow()">Show YouTube</button>
 
-<!-- # CHATROOM INPUT # -->
+<!-- # CHATROOM -->
 <div class="floating-window" id="chatWindow">
   <div class="floating-header">
     <span>Chatango Chatroom:</span>
@@ -55,8 +59,8 @@
 </div>
 <button class="show-youtube-btn" id="showChatBtn" onclick="showChatWindow()">Show Chat Input</button>
 
-<!-- # FRIEND LIST # -->
-<div class="floating-window" id="chatWindow">
+<!-- # FRIENDLIST -->
+<div class="floating-window" id="friendWindow">
   <div class="floating-header">
     <span>Friends</span>
     <button onclick="hideFriendWindow()">✖</button>
@@ -73,10 +77,9 @@
 </div>
 <button id="showFriendBtn" onclick="showFriendWindow()">Show Friends</button>
 
-<!-- # BLACKJACK # -->
+<!-- # BLACKJACK -->
 <button id="showBlackjackBtn" onclick="showBlackjackWindow()">Show Blackjack</button>
-
-<div id="blackjackWindow">
+<div class="floating-window" id="blackjackWindow">
   <div class="floating-header">
     <span>Blackjack Game</span>
     <button aria-label="Close" onclick="hideBlackjackWindow()">✖</button>
@@ -84,7 +87,7 @@
   <iframe src="https://brandicameron.github.io/blackjack/" allowfullscreen></iframe>
 </div>
 
-<!-- # AUDIO BACKGROUND # -->
+<!-- AUDIO -->
 <audio id="bgMusic" loop>
   <source src="audio/casino-jazz-317385.mp3" type="audio/mpeg" />
   Your browser does not support the audio element.
