@@ -5,15 +5,9 @@
   <title>Atou's Profile</title>
   <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
   <link rel="stylesheet" href="css/style.css" />
-  <style>
-    .floating-window {
-      display: none;
-    }
-  </style>
 </head>
 <body>
 
-<!-- # PROFILE UTAMA -->
 <div class="main-wrapper">
   <div class="container">
     <div class="profile-photo">
@@ -35,7 +29,7 @@
   <div class="chat-widgets" id="chatWidgets"></div>
 </div>
 
-<!-- # YOUTUBE -->
+<!-- YouTube -->
 <div class="floating-window" id="ytWindow">
   <div class="floating-header">
     <span>YouTube Search:</span>
@@ -48,7 +42,7 @@
 </div>
 <button class="show-youtube-btn" id="showBtn" onclick="showWindow()">Show YouTube</button>
 
-<!-- # CHATROOM -->
+<!-- Chat Input -->
 <div class="floating-window" id="chatWindow">
   <div class="floating-header">
     <span>Chatango Chatroom:</span>
@@ -59,7 +53,7 @@
 </div>
 <button class="show-youtube-btn" id="showChatBtn" onclick="showChatWindow()">Show Chat Input</button>
 
-<!-- # FRIENDLIST -->
+<!-- Friend List -->
 <div class="floating-window" id="friendWindow">
   <div class="floating-header">
     <span>Friends</span>
@@ -77,9 +71,9 @@
 </div>
 <button id="showFriendBtn" onclick="showFriendWindow()">Show Friends</button>
 
-<!-- # BLACKJACK -->
-<button id="showBlackjackBtn" onclick="showBlackjackWindow()">Show Blackjack</button>
-<div class="floating-window" id="blackjackWindow">
+  <button id="showBlackjackBtn" onclick="showBlackjackWindow()">Show Blackjack</button>
+
+<div id="blackjackWindow">
   <div class="floating-header">
     <span>Blackjack Game</span>
     <button aria-label="Close" onclick="hideBlackjackWindow()">✖</button>
@@ -87,7 +81,7 @@
   <iframe src="https://brandicameron.github.io/blackjack/" allowfullscreen></iframe>
 </div>
 
-<!-- AUDIO -->
+<!-- Audio element -->
 <audio id="bgMusic" loop>
   <source src="audio/casino-jazz-317385.mp3" type="audio/mpeg" />
   Your browser does not support the audio element.
