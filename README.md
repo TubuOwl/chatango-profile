@@ -16,17 +16,6 @@ A simple profile website displaying user "Atou" information, featuring Chatango 
 
 ---
 
-## Folder Structure
-
-/
-├── index.html       # Main webpage
-├── css/
-│   └── style.css    # Main stylesheet
-└── js/
-    └── script.js    # Main JavaScript file
-
----
-
 ## How to Run
 
 1. Clone or download this repository.
@@ -56,12 +45,6 @@ A simple profile website displaying user "Atou" information, featuring Chatango 
 ## License
 
 This project is open source and free to use for personal or educational purposes.
-
----
-
-## Contact
-
-For questions or suggestions, please contact the project creator.
 
 ---
 
