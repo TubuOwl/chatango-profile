@@ -142,7 +142,7 @@ body {
 
 .show-youtube-btn, #showChatBtn, #showFriendBtn {
   position: fixed;
-  background: #cc0000;
+  background: #808080;
   color: white;
   border: none;
   border-radius: 5px;
