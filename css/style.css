@@ -1,41 +1,36 @@
-:root {
-  --red: #cc0000;
-  --red-dark: #990000;
-  --gray-dark: #404040;
-  --gray-light: #c0c0c0;
-  --white: #fff;
-}
-
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(to right, rgba(255,0,0,0), var(--red));
+  background: linear-gradient(to right, rgba(255, 0, 0, 0), rgba(255, 0, 0, 1));
   display: flex;
   justify-content: center;
   padding: 20px;
 }
 
-.main-wrapper, .container {
+.main-wrapper {
+  width: 100%;
   max-width: 1200px;
-  margin: auto;
 }
 
 .container {
   max-width: 600px;
-  background: rgba(255,255,255,0.9);
+  margin: auto;
+  background: rgba(255, 255, 255, 0.9);
   padding: 20px;
   border-radius: 10px;
-  border: 2px solid var(--red);
+  border: 2px solid #cc0000;
 }
 
 .profile-photo img {
   width: 111px;
+  height: auto;
+  display: block;
   margin: 0 auto 20px;
   border-radius: 10px;
-  display: block;
 }
 
-.profile-info, .about {
+.profile-info {
+  font-size: 16px;
   text-align: left;
   padding-left: 10px;
 }
@@ -47,6 +42,8 @@ body {
 
 .about {
   margin-top: 20px;
+  text-align: left;
+  padding-left: 10px;
 }
 
 .chat-widgets {
@@ -57,25 +54,22 @@ body {
   margin-top: 30px;
 }
 
-.chat-box, .floating-window {
-  border: 2px solid var(--red);
-  border-radius: 10px;
-  background: var(--white);
-  overflow: hidden;
-  position: relative;
-}
-
 .chat-box {
+  position: relative;
+  border: 2px solid #cc0000;
+  border-radius: 10px;
+  overflow: hidden;
   width: 250px;
   height: 350px;
+  background: #ffffff;
 }
 
-.close-btn {
+.chat-box .close-btn {
   position: absolute;
   top: 4px;
   right: 6px;
-  background: var(--red);
-  color: var(--white);
+  background: #cc0000;
+  color: white;
   font-weight: bold;
   border: none;
   border-radius: 50%;
@@ -90,22 +84,25 @@ body {
   transition: opacity 0.2s ease;
 }
 
-.close-btn:hover {
+.chat-box .close-btn:hover {
   opacity: 1;
 }
 
 .floating-window {
   position: fixed;
+  border: 2px solid #cc0000;
+  border-radius: 10px;
+  background: #fff;
   z-index: 999;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
   transform-origin: center;
-  background: var(--white);
 }
 
 .floating-header {
   display: flex;
-  background: var(--red);
-  color: var(--white);
+  background: #cc0000;
+  color: white;
   padding: 5px;
   justify-content: space-between;
   align-items: center;
@@ -118,8 +115,8 @@ body {
 }
 
 .floating-header button {
-  background: var(--white);
-  color: var(--red);
+  background: white;
+  color: #cc0000;
   border: none;
   padding: 4px 6px;
   margin-left: 5px;
@@ -133,10 +130,12 @@ body {
   border: none;
 }
 
-.show-youtube-btn, #showChatBtn, #showFriendBtn {
+.show-youtube-btn,
+#showChatBtn,
+#showFriendBtn {
   position: fixed;
-  background: var(--red);
-  color: var(--white);
+  background: #cc0000;
+  color: white;
   border: none;
   border-radius: 5px;
   padding: 8px 12px;
@@ -148,6 +147,7 @@ body {
 #showBtn {
   top: 20px;
   right: 20px;
+  display: none;
 }
 
 #showChatBtn {
@@ -198,7 +198,7 @@ body {
 .friend .box {
   width: 50px;
   height: 50px;
-  border: 2px solid var(--red);
+  border: 2px solid #cc0000;
   border-radius: 5px;
   object-fit: cover;
   display: block;
