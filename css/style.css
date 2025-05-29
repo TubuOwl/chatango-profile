@@ -21,9 +21,10 @@ body {
   margin: auto;
   padding: 20px;
   border-radius: 10px;
-  border: 2px solid transparent;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(6px);
+  border: 2px solid rgba(255, 255, 255, 0.2); /* semi-transparent border */
+  background: rgba(255, 255, 255, 0.05);      /* lebih transparan */
+  backdrop-filter: blur(10px);               /* lebih blur agar efek frosted lebih kuat */
+  -webkit-backdrop-filter: blur(10px);       /* untuk dukungan Safari */
   background-clip: padding-box;
   position: relative;
 }
