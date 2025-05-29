@@ -15,10 +15,26 @@ body {
 .container {
   max-width: 600px;
   margin: auto;
-  background: rgba(255, 255, 255, 0.9);
   padding: 20px;
   border-radius: 10px;
-  border: 2px solid #cc0000;
+  border: 2px solid transparent;
+  background: rgba(255, 255, 255, 0.9);
+  background-clip: padding-box;
+  position: relative;
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  z-index: -1;
+  border-radius: 12px;
+  background-image: url('https://png.pngtree.com/background/20230317/original/pngtree-starry-sky-background-picture-image_2148627.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 .profile-photo img {
