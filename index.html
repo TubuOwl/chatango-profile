@@ -216,6 +216,25 @@
       font-size: 12px;
       color: #333;
     }
+    #blackjackWindow {
+    top: 340px;  /* posisi vertikal di bawah friendWindow */
+    left: 20px;  /* kiri sama dengan friendWindow */
+    width: 400px;
+    height: 600px;
+    }
+
+    #showBlackjackBtn {
+    position: fixed;
+    top: 950px; /* kira-kira di bawah friendWindow dan blackjackWindow */
+    left: 20px;
+    background: #cc0000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    z-index: 998;
+    }
   </style>
 </head>
 <body>
@@ -282,6 +301,16 @@
   </div>
 </div>
 <button id="showFriendBtn" onclick="showFriendWindow()">Show Friends</button>
+
+<!-- BlackJack Window -->
+<div class="floating-window" id="blackjackWindow" style="display:none;">
+  <div class="floating-header">
+    <span>Blackjack Game</span>
+    <button onclick="hideBlackjackWindow()">✖</button>
+  </div>
+  <iframe src="https://brandicameron.github.io/blackjack/" class="floating-iframe" allowfullscreen></iframe>
+</div>
+<button id="showBlackjackBtn" onclick="showBlackjackWindow()">Show Blackjack</button>
 
 <script>
   let angle = 0;
@@ -400,6 +429,15 @@
   function showFriendWindow() {
     friendWindow.style.display = "block";
     showFriendBtn.style.display = "none";
+  }
+  function hideBlackjackWindow() {
+    blackjackWindow.style.display = "none";
+    showBlackjackBtn.style.display = "block";
+  }
+
+  function showBlackjackWindow() {
+    blackjackWindow.style.display = "block";
+    showBlackjackBtn.style.display = "none";
   }
 </script>
 
