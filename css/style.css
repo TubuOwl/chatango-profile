@@ -22,7 +22,7 @@ body {
   padding: 20px;
   border-radius: 10px;
   border: none; 
-  background: transparent; 
+  background-image: transparent; 
   background-clip: padding-box;
   position: relative;
 }
@@ -187,7 +187,7 @@ body {
   left: 20px;
   width: 200px;
   height: auto;
-  background: transparent;
+  background-image: url('https://wallpapercave.com/wp/wp10696106.jpg');
 }
 
 #friendList {
