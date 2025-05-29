@@ -1,29 +1,20 @@
 let angle = 0;
 
-const ytWindow = document.getElementById("ytWindow");
-const showBtn = document.getElementById("showBtn");
-const ytInput = document.getElementById("ytInput");
-const ytFrame = document.getElementById("ytFrame");
-
-const chatWindow = document.getElementById("chatWindow");
-const showChatBtn = document.getElementById("showChatBtn");
-const chatInput = document.getElementById("chatInput");
-
-const friendWindow = document.getElementById("friendWindow");
-const showFriendBtn = document.getElementById("showFriendBtn");
-
 function hideWindow() {
   ytWindow.style.display = "none";
   showBtn.style.display = "block";
 }
+
 function showWindow() {
   ytWindow.style.display = "block";
   showBtn.style.display = "none";
 }
+
 function rotateWindow() {
   angle = (angle + 90) % 360;
   ytWindow.style.transform = `rotate(${angle}deg)`;
 }
+
 async function changeURL() {
   const input = ytInput.value.trim();
   if (!input) return alert("Masukkan kata kunci pencarian YouTube.");
@@ -59,7 +50,7 @@ function createChatElement(chatname, settings, idSuffix) {
   div.appendChild(closeBtn);
 
   const script = document.createElement("script");
-  script.id = "cid" + String(idSuffix).padStart(19, "0");
+  script.id = "cid" + String(idSuffix).padStart(19, '0');
   script.setAttribute("data-cfasync", "false");
   script.async = true;
   script.src = "//st.chatango.com/js/gz/emb.js";
@@ -68,7 +59,7 @@ function createChatElement(chatname, settings, idSuffix) {
   script.textContent = JSON.stringify({
     handle: chatname,
     arch: "js",
-    styles: settings,
+    styles: settings
   });
 
   div.appendChild(script);
@@ -83,10 +74,9 @@ function initChats() {
 
   const chatData = rawData[1].split(",");
   chatData.forEach((entry, i) => {
-    let chatname = entry,
-      settings = defaultSettings;
-    if (entry.includes("!")) [chatname] = entry.split("!"), (settings = graySettings);
-    else if (entry.includes("$")) [chatname] = entry.split("$"), (settings = blackSettings);
+    let chatname = entry, settings = defaultSettings;
+    if (entry.includes("!")) [chatname] = entry.split("!"), settings = graySettings;
+    else if (entry.includes("$")) [chatname] = entry.split("$"), settings = blackSettings;
     const chatEl = createChatElement(chatname, settings, i);
     chatWidgets.appendChild(chatEl);
   });
@@ -98,6 +88,7 @@ function hideChatWindow() {
   chatWindow.style.display = "none";
   showChatBtn.style.display = "block";
 }
+
 function showChatWindow() {
   chatWindow.style.display = "block";
   showChatBtn.style.display = "none";
@@ -107,7 +98,25 @@ function addChat() {
   const input = chatInput.value.trim();
   if (!input) return alert("Masukkan nama chatroom Chatango.");
   const chatWidgets = document.getElementById("chatWidgets");
-  const exists = Array.from(chatWidgets.querySelectorAll("script")).some((s) => {
+  const exists = Array.from(chatWidgets.querySelectorAll("script")).some(s => {
     try {
       const cfg = JSON.parse(s.textContent);
-      return
+      return cfg.handle.toLowerCase() === input.toLowerCase();
+    } catch {
+      return false;
+    }
+  });
+  if (exists) return alert("Chatroom sudah ada.");
+  chatWidgets.appendChild(createChatElement(input, defaultSettings, Date.now()));
+  chatInput.value = "";
+}
+
+function hideFriendWindow() {
+  friendWindow.style.display = "none";
+  showFriendBtn.style.display = "block";
+}
+
+function showFriendWindow() {
+  friendWindow.style.display = "block";
+  showFriendBtn.style.display = "none";
+}
