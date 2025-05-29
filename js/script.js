@@ -82,7 +82,11 @@ function initChats() {
   });
 }
 
-window.onload = initChats;
+window.onload = function () {
+  initChats();
+  document.getElementById("ytWindow").style.display = "none";
+  document.getElementById("chatWindow").style.display = "none";
+};
 
 function hideChatWindow() {
   chatWindow.style.display = "none";
@@ -120,8 +124,4 @@ function showFriendWindow() {
   friendWindow.style.display = "block";
   showFriendBtn.style.display = "none";
 }
-function () {
-  initChats();
-  document.getElementById("ytWindow").style.display = "none";
-  document.getElementById("chatWindow").style.display = "none";
-};
+
