@@ -120,3 +120,8 @@ function showFriendWindow() {
   friendWindow.style.display = "block";
   showFriendBtn.style.display = "none";
 }
+function () {
+  initChats();
+  document.getElementById("ytWindow").style.display = "none";
+  document.getElementById("chatWindow").style.display = "none";
+};
