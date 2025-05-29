@@ -1,3 +1,5 @@
+let angle = 0;
+
 const ytWindow = document.getElementById("ytWindow");
 const showBtn = document.getElementById("showBtn");
 const ytInput = document.getElementById("ytInput");
@@ -10,39 +12,40 @@ const chatInput = document.getElementById("chatInput");
 const friendWindow = document.getElementById("friendWindow");
 const showFriendBtn = document.getElementById("showFriendBtn");
 
-let angle = 0;
-
-const toggleDisplay = (el, showBtnEl) => {
-  if(el.style.display === "none" || !el.style.display) {
-    el.style.display = "block";
-    if(showBtnEl) showBtnEl.style.display = "none";
-  } else {
-    el.style.display = "none";
-    if(showBtnEl) showBtnEl.style.display = "block";
-  }
-};
-
-const hideWindow = () => toggleDisplay(ytWindow, showBtn);
-const showWindow = () => toggleDisplay(ytWindow, showBtn);
-
-const rotateWindow = () => {
+function hideWindow() {
+  ytWindow.style.display = "none";
+  showBtn.style.display = "block";
+}
+function showWindow() {
+  ytWindow.style.display = "block";
+  showBtn.style.display = "none";
+}
+function rotateWindow() {
   angle = (angle + 90) % 360;
   ytWindow.style.transform = `rotate(${angle}deg)`;
-};
-
+}
 async function changeURL() {
-  const query = ytInput.value.trim();
-  if(!query) return alert("Masukkan kata kunci pencarian YouTube.");
+  const input = ytInput.value.trim();
+  if (!input) return alert("Masukkan kata kunci pencarian YouTube.");
   try {
-    const res = await fetch(`https://toxicdevilapi.vercel.app/search/youtube?query=${encodeURIComponent(query)}`);
+    const res = await fetch(`https://toxicdevilapi.vercel.app/search/youtube?query=${encodeURIComponent(input)}`);
     const data = await res.json();
-    if(data?.result?.length > 0) {
+    if (data?.result?.length > 0) {
       ytFrame.src = `https://www.youtube.com/embed/${data.result[0].id}`;
-    } else alert("Video tidak ditemukan.");
-  } catch {
+    } else {
+      alert("Video tidak ditemukan.");
+    }
+  } catch (error) {
     alert("Gagal memuat video dari API.");
   }
 }
+
+const defaultSettings = {
+  a: "cc0000", b: 100, c: "FFFFFF", d: "FFFFFF", k: "cc0000", l: "cc0000",
+  m: "cc0000", n: "FFFFFF", q: "cc0000", r: 100, fwtickm: 1
+};
+const graySettings = { ...defaultSettings, a: "404040", c: "c0c0c0", d: "c0c0c0", k: "990000" };
+const blackSettings = { ...defaultSettings, a: "000000", c: "ffffff", d: "ffffff" };
 
 function createChatElement(chatname, settings, idSuffix) {
   const div = document.createElement("div");
@@ -56,7 +59,7 @@ function createChatElement(chatname, settings, idSuffix) {
   div.appendChild(closeBtn);
 
   const script = document.createElement("script");
-  script.id = "cid" + String(idSuffix).padStart(19, '0');
+  script.id = "cid" + String(idSuffix).padStart(19, "0");
   script.setAttribute("data-cfasync", "false");
   script.async = true;
   script.src = "//st.chatango.com/js/gz/emb.js";
@@ -65,7 +68,7 @@ function createChatElement(chatname, settings, idSuffix) {
   script.textContent = JSON.stringify({
     handle: chatname,
     arch: "js",
-    styles: settings
+    styles: settings,
   });
 
   div.appendChild(script);
@@ -75,51 +78,36 @@ function createChatElement(chatname, settings, idSuffix) {
 function initChats() {
   const url = window.location.href;
   const chatWidgets = document.getElementById("chatWidgets");
-  const parts = url.split("?");
-  if(parts.length < 2) return;
-  
-  parts[1].split(",").forEach((entry, i) => {
-    let chatname = entry, settings = defaultSettings;
-    if(entry.includes("!")) [chatname] = entry.split("!"), settings = graySettings;
-    else if(entry.includes("$")) [chatname] = entry.split("$"), settings = blackSettings;
-    chatWidgets.appendChild(createChatElement(chatname, settings, i));
+  const rawData = url.split("?");
+  if (rawData.length < 2) return;
+
+  const chatData = rawData[1].split(",");
+  chatData.forEach((entry, i) => {
+    let chatname = entry,
+      settings = defaultSettings;
+    if (entry.includes("!")) [chatname] = entry.split("!"), (settings = graySettings);
+    else if (entry.includes("$")) [chatname] = entry.split("$"), (settings = blackSettings);
+    const chatEl = createChatElement(chatname, settings, i);
+    chatWidgets.appendChild(chatEl);
   });
+}
+
+window.onload = initChats;
+
+function hideChatWindow() {
+  chatWindow.style.display = "none";
+  showChatBtn.style.display = "block";
+}
+function showChatWindow() {
+  chatWindow.style.display = "block";
+  showChatBtn.style.display = "none";
 }
 
 function addChat() {
   const input = chatInput.value.trim();
-  if(!input) return alert("Masukkan nama chatroom Chatango.");
+  if (!input) return alert("Masukkan nama chatroom Chatango.");
   const chatWidgets = document.getElementById("chatWidgets");
-  const exists = Array.from(chatWidgets.querySelectorAll("script")).some(s => {
+  const exists = Array.from(chatWidgets.querySelectorAll("script")).some((s) => {
     try {
-      return JSON.parse(s.textContent).handle.toLowerCase() === input.toLowerCase();
-    } catch {
-      return false;
-    }
-  });
-  if(exists) return alert("Chatroom sudah ada.");
-  chatWidgets.appendChild(createChatElement(input, defaultSettings, Date.now()));
-  chatInput.value = "";
-}
-
-function hideChatWindow() {
-  toggleDisplay(chatWindow, showChatBtn);
-}
-function showChatWindow() {
-  toggleDisplay(chatWindow, showChatBtn);
-}
-
-function hideFriendWindow() {
-  toggleDisplay(friendWindow, showFriendBtn);
-}
-function showFriendWindow() {
-  toggleDisplay(friendWindow, showFriendBtn);
-}
-
-window.onload = () => {
-  initChats();
-  ytWindow.style.display = "none";
-  chatWindow.style.display = "none";
-  friendWindow.style.display = "none";
-  showBtn.style.display = "block";
-};
+      const cfg = JSON.parse(s.textContent);
+      return
