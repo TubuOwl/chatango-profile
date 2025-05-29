@@ -339,6 +339,7 @@
     <button onclick="hideBlackjackWindow()">✖</button>
   </div>
   <iframe src="https://brandicameron.github.io/blackjack/" allowfullscreen></iframe>
+  <audio id="blackjackAudio" src="casino-jazz-317385.mp3" preload="auto"></audio>
 </div>
 
 <button id="showBlackjackBtn" onclick="showBlackjackWindow()">Show Blackjack</button>
@@ -463,16 +464,23 @@
   }
   const blackjackWindow = document.getElementById("blackjackWindow");
   const showBlackjackBtn = document.getElementById("showBlackjackBtn");
-  
-  function hideBlackjackWindow() {
-    blackjackWindow.style.display = "none";
-    showBlackjackBtn.style.display = "block";
-  }
+  const blackjackAudio = document.getElementById('blackjackAudio');
 
-  function showBlackjackWindow() {
-    blackjackWindow.style.display = "block";
-    showBlackjackBtn.style.display = "none";
-  }
+function showBlackjackWindow() {
+  blackjackWindow.style.display = 'block';
+  blackjackAudio.play().catch(e => {
+    // Kadang browser blok autoplay, ini fallback supaya gak error
+    console.log('Audio autoplay blocked:', e);
+  });
+}
+
+function hideBlackjackWindow() {
+  blackjackWindow.style.display = 'none';
+  blackjackAudio.pause();
+  blackjackAudio.currentTime = 0; // reset ke awal
+}
+
+
 </script>
 
 </body>
