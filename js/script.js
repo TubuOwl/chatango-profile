@@ -1,7 +1,4 @@
-/* ################################################################ */
-/* # YOUTUBE WINDOW ################################################ */
-/* ################################################################ */
-
+/* # YOUTUBE WINDOW # */
 let angle = 0;
 
 function hideWindow() {
@@ -35,9 +32,7 @@ async function changeURL() {
   }
 }
 
-/* ################################################################ */
-/* # CHATROOM / CHATBOX ########################################### */
-/* ################################################################ */
+/* # CHATROOM / CHATBOX # */
 
 const defaultSettings = {
   a: "cc0000", b: 100, c: "FFFFFF", d: "FFFFFF", k: "cc0000", l: "cc0000",
@@ -119,9 +114,7 @@ function addChat() {
   chatInput.value = "";
 }
 
-/* ################################################################ */
-/* # FRIEND LIST ################################################## */
-/* ################################################################ */
+/* # FRIEND LIST # */
 
 function hideFriendWindow() {
   friendWindow.style.display = "none";
@@ -133,9 +126,7 @@ function showFriendWindow() {
   showFriendBtn.style.display = "none";
 }
 
-/* ################################################################ */
-/* # BLACKJACK #################################################### */
-/* ################################################################ */
+/* # BLACKJACK # */
 
 const blackjackWindow = document.getElementById("blackjackWindow");
 const showBlackjackBtn = document.getElementById("showBlackjackBtn");
