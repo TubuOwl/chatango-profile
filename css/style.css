@@ -1,11 +1,14 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: none;
   background-image: url('https://wallpapersok.com/images/high/red-aesthetic-laptop-moon-clouds-sky-9rte017wngiwchfr.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   display: flex;
   justify-content: center;
   padding: 20px;
+  min-height: 100vh; /* Tambahan agar tinggi body minimal setinggi viewport */
 }
 
 .main-wrapper {
