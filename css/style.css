@@ -1,7 +1,8 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
+  background: none;
+  background-image: url('https://pict.sindonews.net/dyn/850/pena/news/2022/04/23/700/752021/fakta-higanbana-bunga-kematian-yang-sering-muncul-di-anime-fwc.jpg');
   display: flex;
   justify-content: center;
   padding: 20px;
