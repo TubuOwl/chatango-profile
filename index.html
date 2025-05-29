@@ -216,54 +216,6 @@
       font-size: 12px;
       color: #333;
     }
-    #blackjackWindow {
-      position: fixed;
-      bottom: 40px;
-      right: 20px;
-      width: 400px;
-      height: 600px;
-      background: white;
-      border: 2px solid #cc0000;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      z-index: 1000;
-      display: none;
-    }
-    #showBlackjackBtn {
-      position: fixed;
-      bottom: 0;
-      right: 20px;
-      background: #cc0000;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      padding: 8px 12px;
-      cursor: pointer;
-      z-index: 1001;
-    }
-    .floating-header {
-      background: #cc0000;
-      color: white;
-      padding: 5px;
-      font-weight: bold;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .floating-header button {
-      background: white;
-      color: #cc0000;
-      border: none;
-      padding: 4px 6px;
-      margin-left: 5px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    iframe {
-      width: 100%;
-      height: calc(100% - 32px);
-      border: none;
-    }
   </style>
 </head>
 <body>
@@ -329,20 +281,6 @@
     </div>
   </div>
   <button id="showFriendBtn" onclick="showFriendWindow()">Show Friends</button>
-
-  <!-- Blackjack Window -->
-  <button id="showBlackjackBtn" onclick="showBlackjackWindow()">Show Blackjack</button>
-
-  <div id="blackjackWindow">
-    <div class="floating-header">
-      <span>Blackjack Game</span>
-      <button onclick="hideBlackjackWindow()">✖</button>
-    </div>
-    <iframe src="https://brandicameron.github.io/blackjack/" allowfullscreen></iframe>
-    <audio id="blackjackAudio" src="casino-jazz-317385.mp3" preload="auto"></audio>
-  </div>
-
-  <button id="showBlackjackBtn" onclick="showBlackjackWindow()">Show Blackjack</button>
 
 <script>
   let angle = 0;
@@ -461,23 +399,6 @@
   function showFriendWindow() {
     friendWindow.style.display = "block";
     showFriendBtn.style.display = "none";
-  }
-  const blackjackWindow = document.getElementById("blackjackWindow");
-  const showBlackjackBtn = document.getElementById("showBlackjackBtn");
-  const blackjackAudio = document.getElementById('blackjackAudio');
-
-  function showBlackjackWindow() {
-    blackjackWindow.style.display = 'block';
-    blackjackAudio.play().catch(e => {
-      // Kadang browser blok autoplay, ini fallback supaya gak error
-      console.log('Audio autoplay blocked:', e);
-    });
-  }
-
-  function hideBlackjackWindow() {
-    blackjackWindow.style.display = 'none';
-    blackjackAudio.pause();
-    blackjackAudio.currentTime = 0; // reset ke awal
   }
 </script>
 
