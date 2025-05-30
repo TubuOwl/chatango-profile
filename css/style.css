@@ -1,32 +1,17 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-image: url('https://i.imgur.com/bn5W240.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  display: flex;
-  justify-content: center;
-  padding: 20px;
-  min-height: 100vh;
-}
-
-.main-wrapper {
-  width: 100%;
-  max-width: 1200px;
-}
+/* ################################################################ */
+/* # PROFILE UTAMA ################################################ */
+/* ################################################################ */
 
 .container {
   max-width: 400px;
   margin: auto;
   padding: 20px;
   border-radius: 10px;
-  border: none; 
-  background-image: transparent; 
+  border: none;
+  background-image: transparent;
   background-clip: padding-box;
   position: relative;
 }
-
 
 .profile-photo img {
   width: 111px;
@@ -55,6 +40,62 @@ body {
   padding-left: 10px;
   color: white;
 }
+
+/* ################################################################ */
+/* # YOUTUBE WINDOW ################################################ */
+/* ################################################################ */
+
+#ytWindow {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 400px;
+  height: 300px;
+  border: 2px solid #808080;
+  border-radius: 10px;
+  background-image: url('https://cdn.shopify.com/s/files/1/0724/4637/8302/files/Blue_Spider_Lily_Anime_600x600.jpg?v=1684996568');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 999;
+  overflow: hidden;
+}
+
+#ytWindow .floating-header {
+  display: flex;
+  background: #808080;
+  color: white;
+  padding: 5px;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+#ytWindow .floating-header input {
+  width: 180px;
+  font-size: 12px;
+}
+
+#ytWindow .floating-header button {
+  background: white;
+  color: #808080;
+  border: none;
+  padding: 4px 6px;
+  margin-left: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#ytWindow .floating-iframe {
+  width: 100%;
+  height: calc(100% - 32px);
+  border: none;
+}
+
+/* ################################################################ */
+/* # CHATROOM / CHATBOX ########################################### */
+/* ################################################################ */
 
 .chat-widgets {
   display: flex;
@@ -98,107 +139,40 @@ body {
   opacity: 1;
 }
 
-.floating-window {
-  position: fixed;
-  border: 2px solid #808080;
-  border-radius: 10px;
-  background: transparent;
-  z-index: 999;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  overflow: hidden;
-  transform-origin: center;
-}
-
-.floating-header {
-  display: flex;
-  background: #808080;
-  color: white;
-  padding: 5px;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 14px;
-}
-
-.floating-header input {
-  width: 180px;
-  font-size: 12px;
-}
-
-.floating-header button {
-  background: white;
-  color: #808080;
-  border: none;
-  padding: 4px 6px;
-  margin-left: 5px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.floating-iframe {
-  width: 100%;
-  height: calc(100% - 32px);
-  border: none;
-}
-
-.show-youtube-btn, #showChatBtn, #showFriendBtn {
-  position: fixed;
-  background: #808080;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 12px;
-  cursor: pointer;
-  display: none;
-  z-index: 998;
-}
-
-#showBtn {
-  top: 20px;
-  right: 20px;
-  display: none;
-}
-
-#showChatBtn {
-  top: 330px;
-  right: 20px;
-}
-
-#showFriendBtn {
-  top: 20px;
-  left: 20px;
-}
-
 #chatWindow {
+  position: fixed;
   top: 340px !important;
   right: 20px !important;
   width: 400px !important;
   height: 150px !important;
+  border: 2px solid #808080;
+  border-radius: 10px;
   background-image: url('https://cdn.shopify.com/s/files/1/0724/4637/8302/files/Blue_Spider_Lily_Anime_600x600.jpg?v=1684996568');
-  background-size: cover;       
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 999;
 }
 
-#ytWindow {
-  top: 20px;
-  right: 20px;
-  width: 400px;
-  height: 300px;
-  background-image: url('https://cdn.shopify.com/s/files/1/0724/4637/8302/files/Blue_Spider_Lily_Anime_600x600.jpg?v=1684996568');
-  background-size: cover;       
-  background-repeat: no-repeat;
-  background-position: center;
-}
+/* ################################################################ */
+/* # FRIEND LIST ################################################## */
+/* ################################################################ */
 
 #friendWindow {
+  position: fixed;
   top: 20px;
   left: 20px;
   width: 200px;
   height: auto;
+  border: 2px solid #808080;
+  border-radius: 10px;
   background-image: url('https://wallpapercave.com/wp/wp10696106.jpg');
-  background-size: cover;       
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 999;
 }
 
 #friendList {
@@ -215,6 +189,81 @@ body {
   text-align: center;
 }
 
+.friend .box {
+  width: 50px;
+  height: 50px;
+  border: 2px solid white;
+  border-radius: 5px;
+  object-fit: cover;
+  display: block;
+  margin: auto;
+  animation: borderPulse 2s infinite;
+}
+
+.friend span {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #FFF;
+}
+
+/* ################################################################ */
+/* # BLACKJACK #################################################### */
+/* ################################################################ */
+
+#blackjackWindow {
+  position: fixed;
+  top: 100px;
+  left: 20px;
+  width: 400px;
+  height: 600px;
+  border: 2px solid #808080;
+  border-radius: 10px;
+  background: white;
+  z-index: 1000;
+  display: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+#blackjackWindow > .floating-header {
+  background-color: #808080;
+  color: white;
+  padding: 8px 12px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+#blackjackWindow > .floating-header > button {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 6px;
+}
+
+#blackjackWindow > .floating-header > button:hover {
+  color: #ff6666;
+}
+
+#blackjackWindow > iframe {
+  width: 100%;
+  height: calc(100% - 34px);
+  border: none;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background: #000;
+}
+
+/* ################################################################ */
+/* # ANIMASI UMUM ################################################# */
+/* ################################################################ */
+
 @keyframes borderPulse {
   0% {
     border-color: white;
@@ -226,82 +275,3 @@ body {
     border-color: white;
   }
 }
-
-.friend .box {
-  width: 50px;
-  height: 50px;
-  border: 2px solid white; 
-  border-radius: 5px;
-  object-fit: cover;
-  display: block;
-  margin: auto;
-  animation: borderPulse 2s infinite; 
-}
-
-.friend span {
-  display: block;
-  margin-top: 4px;
-  font-size: 12px;
-  color: #FFF;
-}
-#blackjackWindow {
-      position: fixed;
-      top: 100px;
-      left: 20px;
-      width: 400px;
-      height: 600px;
-      border: 2px solid #808080;
-      border-radius: 10px;
-      background: white;
-      z-index: 1000;
-      display: none;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-    #showBlackjackBtn {
-      position: fixed;
-      top: 340px;
-      left: 20px;
-      background: #808080;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      padding: 8px 12px;
-      cursor: pointer;
-      z-index: 1000;
-      font-weight: bold;
-      font-size: 14px;
-    }
-    #showBlackjackBtn:hover {
-      background: #ff4d4d;
-    }
-    #blackjackWindow > .floating-header {
-      background-color: #808080;
-      color: white;
-      padding: 8px 12px;
-      font-weight: bold;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
-    }
-    #blackjackWindow > .floating-header > button {
-      background: transparent;
-      border: none;
-      color: white;
-      font-size: 20px;
-      cursor: pointer;
-      line-height: 1;
-      padding: 0 6px;
-    }
-    #blackjackWindow > .floating-header > button:hover {
-      color: #ff6666;
-    }
-    #blackjackWindow > iframe {
-      width: 100%;
-      height: calc(100% - 34px);
-      border: none;
-      border-bottom-left-radius: 10px;
-      border-bottom-right-radius: 10px;
-      background: #000;
-    }
