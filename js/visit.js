@@ -23,3 +23,7 @@ window.addEventListener("DOMContentLoaded", () => {
   localStorage.setItem("history", JSON.stringify(history));
   console.log("User history updated:", history);
 });
+
+
+#pass
+#soon_create_db_with_postgres
