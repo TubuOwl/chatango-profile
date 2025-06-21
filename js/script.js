@@ -1,3 +1,4 @@
+
 /* ################################################################ */
 /* # YOUTUBE WINDOW ################################################ */
 /* ################################################################ */
@@ -5,21 +6,29 @@
 let angle = 0;
 
 function hideWindow() {
+  const ytWindow = document.getElementById("ytWindow");
+  const showBtn = document.getElementById("showBtn");
   ytWindow.style.display = "none";
   showBtn.style.display = "block";
 }
 
 function showWindow() {
+  closeAllWindows();
+  const ytWindow = document.getElementById("ytWindow");
+  const showBtn = document.getElementById("showBtn");
   ytWindow.style.display = "block";
   showBtn.style.display = "none";
 }
 
 function rotateWindow() {
+  const ytWindow = document.getElementById("ytWindow");
   angle = (angle + 90) % 360;
   ytWindow.style.transform = `rotate(${angle}deg)`;
 }
 
 async function changeURL() {
+  const ytInput = document.getElementById("ytInput");
+  const ytFrame = document.getElementById("ytFrame");
   const input = ytInput.value.trim();
   if (!input) return alert("Masukkan kata kunci pencarian YouTube.");
   try {
@@ -93,16 +102,22 @@ function initChats() {
 window.onload = initChats;
 
 function hideChatWindow() {
+  const chatWindow = document.getElementById("chatWindow");
+  const showChatBtn = document.getElementById("showChatBtn");
   chatWindow.style.display = "none";
   showChatBtn.style.display = "block";
 }
 
 function showChatWindow() {
+  closeAllWindows();
+  const chatWindow = document.getElementById("chatWindow");
+  const showChatBtn = document.getElementById("showChatBtn");
   chatWindow.style.display = "block";
   showChatBtn.style.display = "none";
 }
 
 function addChat() {
+  const chatInput = document.getElementById("chatInput");
   const input = chatInput.value.trim();
   if (!input) return alert("Masukkan nama chatroom Chatango.");
   const chatWidgets = document.getElementById("chatWidgets");
@@ -124,13 +139,48 @@ function addChat() {
 /* ################################################################ */
 
 function hideFriendWindow() {
+  const friendWindow = document.getElementById("friendWindow");
+  const showFriendBtn = document.getElementById("showFriendBtn");
   friendWindow.style.display = "none";
   showFriendBtn.style.display = "block";
 }
 
 function showFriendWindow() {
+  closeAllWindows();
+  const friendWindow = document.getElementById("friendWindow");
+  const showFriendBtn = document.getElementById("showFriendBtn");
   friendWindow.style.display = "block";
   showFriendBtn.style.display = "none";
+}
+
+/* ################################################################ */
+/* # AUTO-CLOSE WINDOWS SYSTEM #################################### */
+/* ################################################################ */
+
+function closeAllWindows() {
+  // Close YouTube window
+  const ytWindow = document.getElementById("ytWindow");
+  const showBtn = document.getElementById("showBtn");
+  ytWindow.style.display = "none";
+  showBtn.style.display = "block";
+  
+  // Close Chat window
+  const chatWindow = document.getElementById("chatWindow");
+  const showChatBtn = document.getElementById("showChatBtn");
+  chatWindow.style.display = "none";
+  showChatBtn.style.display = "block";
+  
+  // Close Friend window
+  const friendWindow = document.getElementById("friendWindow");
+  const showFriendBtn = document.getElementById("showFriendBtn");
+  friendWindow.style.display = "none";
+  showFriendBtn.style.display = "block";
+  
+  // Close Blackjack window
+  blackjackWindow.style.display = "none";
+  showBlackjackBtn.style.display = "block";
+  bgMusic.pause();
+  bgMusic.currentTime = 0;
 }
 
 /* ################################################################ */
@@ -149,6 +199,7 @@ function hideBlackjackWindow() {
 }
 
 function showBlackjackWindow() {
+  closeAllWindows();
   blackjackWindow.style.display = "block";
   showBlackjackBtn.style.display = "none";
   bgMusic.play().catch(err => {
