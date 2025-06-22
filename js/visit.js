@@ -1,4 +1,5 @@
 window.addEventListener("DOMContentLoaded", () => {
+  // Ambil nama user dari cookie Chatango
   function rand(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
   }
@@ -14,36 +15,50 @@ window.addEventListener("DOMContentLoaded", () => {
     name = "Anon" + rand(1000, 9999);
   }
 
-  // Simpan history terbaru
+  // Simpan ke history (opsional)
   let history = JSON.parse(localStorage.getItem("history")) || [];
-  let timestamp = new Date().toISOString();
-  history.push({ username: name, timestamp });
+  history.push({ username: name, timestamp: new Date().toISOString() });
   localStorage.setItem("history", JSON.stringify(history));
 
-  // Buat elemen pesan
-  const display = document.createElement("div");
-  display.style.padding = "10px";
-  display.style.background = "#fef3c7";
-  display.style.border = "1px solid #f59e0b";
-  display.style.margin = "10px";
-  display.style.fontFamily = "Arial, sans-serif";
-  display.style.fontSize = "16px";
-  display.style.textAlign = "center";
-  display.textContent = `Hello, ${name}, page ini akan berubah dalam 5 second`;
+  // Bersihkan seluruh isi halaman
+  document.head.innerHTML = "";
+  document.body.innerHTML = "";
+  document.body.style.margin = "0";
+  document.body.style.padding = "0";
+  document.body.style.background = "#fff";
 
-  document.body.prepend(display);
+  // Tampilkan pesan di tengah halaman
+  const message = document.createElement("div");
+  message.textContent = `Hello, ${name}, page will change in 5 second`;
+  message.style.cssText = `
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    color: #333;
+    border: 2px solid #f59e0b;
+    padding: 20px 30px;
+    background: #fef3c7;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  `;
+  document.body.appendChild(message);
 
-  // Ganti isi body dengan iframe setelah 5 detik
+  // Setelah 5 detik, tampilkan iframe
   setTimeout(() => {
-    document.body.innerHTML = ''; // Kosongkan isi body
-    const iframe = document.createElement('iframe');
+    document.body.innerHTML = ""; // Hapus pesan
+    const iframe = document.createElement("iframe");
     iframe.src = "https://chatango-profile-dusky.vercel.app/";
-    iframe.style.position = "fixed";
-    iframe.style.top = "0";
-    iframe.style.left = "0";
-    iframe.style.width = "100%";
-    iframe.style.height = "100%";
-    iframe.style.border = "none";
+    iframe.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    `;
     document.body.appendChild(iframe);
   }, 5000);
 });
