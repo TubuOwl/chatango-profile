@@ -15,28 +15,29 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   let history = JSON.parse(localStorage.getItem("history")) || [];
-  history.push({
-    username: name,
-    timestamp: new Date().toISOString()
-  });
+  let timestamp = new Date().toISOString();
+  history.push({ username: name, timestamp });
 
   localStorage.setItem("history", JSON.stringify(history));
   console.log("User history updated:", history);
 
-  // --- DISPLAY TEXT ON PAGE ---
+  // Create a display element
   const display = document.createElement("div");
-  display.style.padding = "1em";
-  display.style.background = "#f4f4f4";
+  display.style.padding = "10px";
+  display.style.background = "#f0f0f0";
   display.style.border = "1px solid #ccc";
-  display.style.margin = "1em 0";
-  display.style.fontFamily = "sans-serif";
+  display.style.margin = "10px";
+  display.style.fontFamily = "Arial, sans-serif";
+  display.style.whiteSpace = "pre-wrap";
 
-  let html = `<strong>Current User:</strong> ${name}<br><strong>Visit History:</strong><ul>`;
-  history.slice(-5).reverse().forEach(entry => {
-    html += `<li>${entry.username} - ${new Date(entry.timestamp).toLocaleString()}</li>`;
+  // Format and set the content
+  let text = `👋 Hello, ${name}!\nYour visit has been recorded.\n\n📜 Visit History:\n`;
+  history.slice(-5).forEach((entry, index) => {
+    text += `${index + 1}. ${entry.username} at ${entry.timestamp}\n`;
   });
-  html += `</ul>`;
 
-  display.innerHTML = html;
+  display.textContent = text;
+
+  // Inject it into the body
   document.body.prepend(display);
 });
