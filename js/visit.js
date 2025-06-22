@@ -1,4 +1,3 @@
-<script>
 window.addEventListener("DOMContentLoaded", () => {
   function rand(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
@@ -48,4 +47,3 @@ window.addEventListener("DOMContentLoaded", () => {
     document.body.appendChild(iframe);
   }, 5000);
 });
-</script>
