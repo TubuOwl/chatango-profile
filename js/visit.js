@@ -26,7 +26,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // Buat pesan di tengah
   const msg = document.createElement("div");
-  msg.textContent = `Hello, ${name}, page will change in 5 seconds`;
+  msg.textContent = `Hello, ${name}, this page will change in 5 seconds!`;
   msg.style.cssText = `
     position: fixed;
     top: 50%;
