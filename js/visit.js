@@ -1,5 +1,4 @@
 window.addEventListener("DOMContentLoaded", () => {
-  // Ambil nama user dari cookie Chatango atau buat Anon****
   function rand(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
   }
@@ -24,7 +23,7 @@ window.addEventListener("DOMContentLoaded", () => {
   document.body.style.color = "#fff";
   document.body.style.fontFamily = "Arial, sans-serif";
 
-  // Buat pesan di tengah
+  // push doo
   const msg = document.createElement("div");
   msg.textContent = `Hello, ${name}, this page will change in 5 seconds!`;
   msg.style.cssText = `
