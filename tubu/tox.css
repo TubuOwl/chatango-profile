@@ -1,11 +1,12 @@
-body, html {
+<style>
+ body, html {
       margin: 0;
       padding: 0;
       height: 100%;
       overflow: hidden;
       font-family: Arial, sans-serif;
     }
-.video-bg {
+ .video-bg {
       position: fixed;
       top: 0;
       left: 0;
@@ -14,9 +15,9 @@ body, html {
       object-fit: cover; 
       z-index: -1; 
     }
-a#dl-banner-300x250,
-a#dl-banner-728x90,
-td.topad {
+ a#dl-banner-300x250,
+ a#dl-banner-728x90,
+ td.topad {
     display: none !important;
-}
- 
+ }
+</style>
