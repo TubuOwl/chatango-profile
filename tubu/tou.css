@@ -1,11 +1,10 @@
 <style>
-  body, html {
+ body, html {
       margin: 0;
       padding: 0;
       height: 100%;
       overflow: hidden;
       font-family: Arial, sans-serif;
-      background: #fff;
     }
     .bg-video {
       position: fixed;
@@ -16,22 +15,20 @@
       object-fit: cover;
       z-index: -1;
       transform: scaleX(-1);
-      opacity: 0;
-      transition: opacity 0s ease;
-    }
-    .bg-video.active {
       opacity: 1;
-      z-index: 0;
+      transition: opacity 1s ease;
     }
-
-    a#dl-banner-300x250,
-    a#dl-banner-728x90,
-    td.topad,
-    div.top-links,
-    iframe[src*="vissle.me"] {
-        display: none !important;
-        visibility: hidden !important;
-        width: 0 !important;
-        height: 0 !important;
+    .bg-video.fade-out {
+      opacity: 0;
     }
+ a#dl-banner-300x250,
+ a#dl-banner-728x90,
+ td.topad,
+ div.top-links,
+ iframe[src*="vissle.me"] {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+}
 </style>
