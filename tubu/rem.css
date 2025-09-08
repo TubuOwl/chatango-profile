@@ -18,7 +18,7 @@
     z-index: -1;
     transform: scaleX(-1);
     opacity: 1;
-    transition: opacity 1s ease;
+    transition: opacity 0.3s ease;
   }
 
   .bg-video.fade-out {
