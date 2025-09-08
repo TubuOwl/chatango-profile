@@ -8,15 +8,15 @@ const sources = [
       "https://www.desktophut.com/files/neAC2K9PM3-l4d2background05.mp4"
     ];
 let index = 0;
-    setInterval(() => {
-      video.classList.add("fade-out");
-      setTimeout(() => {
-        index = (index + 1) % sources.length;
-        video.src = sources[index];
-        video.play();
-        video.classList.remove("fade-out");
-      }, 1000);
-    }, 20000);
+setInterval(() => {
+  video.classList.add("fade-out");
+  setTimeout(() => {
+    index = (index + 1) % sources.length;
+    video.src = sources[index];
+    video.play();
+    video.classList.remove("fade-out");
+  }, 300);
+}, 20000);
 function enableMusic() {
 music.muted = false;
 music.play().catch(err => console.log("Autoplay blocked:", err));
