@@ -4,8 +4,6 @@
     padding: 0;
     height: 100%;
     overflow: hidden;
-    font-family: Arial, sans-serif;
-    background: #FAFBF5;
   }
 
   .bg-video {
@@ -24,5 +22,16 @@
   .bg-video.active {
     opacity: 1;
     z-index: 0;
+  }
+  
+  a#dl-banner-300x250,
+  a#dl-banner-728x90,
+  td.topad,
+  div.top-links,
+  iframe[src*="vissle.me"] {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
   }
 </style>
