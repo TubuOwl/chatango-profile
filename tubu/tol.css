@@ -18,7 +18,8 @@
  a#dl-banner-300x250,
  a#dl-banner-728x90,
  td.topad,
- div.top-links {
+ div.top-links,
+ iframe[src*="vissle.me"] {
     display: none !important;
     visibility: hidden !important;
     width: 0 !important;
