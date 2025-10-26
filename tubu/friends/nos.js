@@ -1,14 +1,26 @@
 const friends = [
-    ["t/u/tubu", "Tubu"],
-    ["a/g/agung", "Agung"],
-    ["c/h/cheese", "Cheese"],
-    ["e/g/eg", "Eg"],
-    ["v/f/vf", "Vf"],
-    ["k/i/kingbael", "Kingbael"],
-    ["u/l/ulnuh", "Ulnuh"],
-    ["p/a/patrick", "Patrick"],
-    ["l/u/lukimukti", "Lukimukti"]
-  ];
+  ["1/e/1ev", "1ev"],
+  ["1/x/1xc", "1xc"],
+  ["a/d/adit", "Adit"],
+  ["a/g/agung", "Agung"],
+  ["a/l/alina", "Alina"],
+  ["b/e/betrayer", "Betrayer"],
+  ["b/o/bounnnw", "Bounnnw"],
+  ["c/h/cheese", "Cheese"],
+  ["d/a/daniel", "Daniel"],
+  ["d/z/dzikriyoshikageliebe", "Dzikriyoshikageliebe"],
+  ["f/a/fath", "Fath"],
+  ["h/i/hikimarun", "Hikimarun"],
+  ["k/i/kitainginlari", "Kitainginlari"],
+  ["n/a/nanbas", "Nanbas"],
+  ["o/r/orekisannn", "Orekisannn"],
+  ["p/a/patrick", "Patrick"],
+  ["t/i/tidakterdaftar", "Tidakterdaftar"],
+  ["u/c/ucup", "Ucup"],
+  ["u/l/ulnuh", "Ulnuh"],
+  ["v/f/vf", "Vf"],
+  ["z/s/zs", "Zs"]
+];
   const container = document.getElementById("friendList");
   friends.forEach(([path, name]) => {
     const div = document.createElement("div");
