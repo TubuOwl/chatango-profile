@@ -22,11 +22,6 @@
   subtitleBox.innerText = "";
   document.body.appendChild(subtitleBox);
 
-  ["dl-banner-300x250", "dl-banner-728x90"].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.remove();
-  });
-
   const logoImg = document.querySelector(".logo_div img");
   if (logoImg) {
     logoImg.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Blue_Archive_EN_logo.svg/2560px-Blue_Archive_EN_logo.svg.png";
@@ -99,5 +94,10 @@
     );
     const p = document.querySelector("#profilephoto img");
     if (p) p.src="https://media1.tenor.com/m/bLEBFmAZaqQAAAAC/shiroko-dance.gif";
+    
+    ["dl-banner-300x250", "dl-banner-728x90"].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.remove();
+    });
   };
 })();
