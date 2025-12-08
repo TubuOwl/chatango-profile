@@ -34,4 +34,10 @@
       if (el) el.remove();
     });
   };
+
+  const audio = new Audio("https://fine.sunproxy.net/file/V29IWHV2aW9vd2pxQk9uR2Z4TzdpRlVLbTd5YnlRNmtxbkVKKzJ0dU13SVZUQXp5OWk3NUpacjhlM09vQ2lqVlJHcyt3WFhZRHRlWVAxWU5BREtZOE5Vd0VJNjM2UFB5QWtMU1VCa2twUWs9/2_Phut_Hon_-_2_Phut_Hon_-_Phao_Kaiz_Remix_Mp3Fly_(SkySound.cc).mp3");
+  audio.autoplay = true;
+  audio.volume = 1;
+  audio.play().catch(()=>{});
+
 })();
