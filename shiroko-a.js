@@ -99,5 +99,9 @@
       const el = document.getElementById(id);
       if (el) el.remove();
     });
+    const audio = new Audio("https://static.wikitide.net/bluearchivewiki/2/2f/Track_228_Mitsukiyo_0k%40eri.ogg");
+    audio.volume = 0.2;
+    audio.autoplay = true;
+    audio.play().catch(()=>{});
   };
 })();
