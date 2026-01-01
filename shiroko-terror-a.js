@@ -137,7 +137,7 @@
       (document.querySelector(`#asltable tr:nth-child(${i+2}) td:nth-child(2) span`)||{}).textContent=v
     );
     const p = document.querySelector("#profilephoto img");
-    if (p) p.src="https://media1.tenor.com/m/UaPa_-rrttQAAAAC/blue-archive-the-animation-blue-archive.gif";
+    if (p) p.src="https://media1.tenor.com/m/32Es3jeULMMAAAAC/shirok.gif";
     
     ["dl-banner-300x250", "dl-banner-728x90"].forEach(id => {
       const el = document.getElementById(id);
