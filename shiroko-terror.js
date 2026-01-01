@@ -73,7 +73,7 @@
       jp: "…いつも通りだね、ここは。",
       en: "This place is still the same.",
       id: "…Tempat ini tetap sama seperti biasanya."
-    }
+    },
     {
       jp: "変わったのは、私だけか。",
       en: "I guess I'm the only one who has changed.",
