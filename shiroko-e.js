@@ -36,25 +36,69 @@
   }
 
   const playlist = [
-    "https://static.wikitide.net/bluearchivewiki/5/50/Shiroko_Season_Xmas.ogg",
-    "https://static.wikitide.net/bluearchivewiki/3/34/Shiroko_LogIn_2.ogg",
-    "https://static.wikitide.net/bluearchivewiki/b/b5/Shiroko_Lobby_1.ogg",
-    "https://static.wikitide.net/bluearchivewiki/2/2f/Shiroko_Lobby_2.ogg",
-    "https://static.wikitide.net/bluearchivewiki/transcoded/0/00/Shiroko_Relationship_Up_1.ogg/Shiroko_Relationship_Up_1.ogg.mp3",
-    "https://static.wikitide.net/bluearchivewiki/transcoded/9/91/Shiroko_Relationship_Up_3.ogg/Shiroko_Relationship_Up_3.ogg.mp3",
-    "https://static.wikitide.net/bluearchivewiki/transcoded/9/9c/Shiroko_Relationship_Up_4.ogg/Shiroko_Relationship_Up_4.ogg.mp3",
-    "https://static.wikitide.net/bluearchivewiki/transcoded/5/55/Shiroko_Growup_2.ogg/Shiroko_Growup_2.ogg.mp3"
+    "https://static.wikitide.net/bluearchivewiki/5/51/Shiroko%EF%BC%8ATerror_Season_NewYear.ogg",
+    "https://static.wikitide.net/bluearchivewiki/f/f9/Shiroko%EF%BC%8ATerror_LogIn_1.ogg",
+    "https://static.wikitide.net/bluearchivewiki/5/5f/Shiroko%EF%BC%8ATerror_LogIn_2.ogg",
+    "https://static.wikitide.net/bluearchivewiki/5/52/Shiroko%EF%BC%8ATerror_Lobby_4.ogg",
+    "https://static.wikitide.net/bluearchivewiki/7/7f/Shiroko%EF%BC%8ATerror_MemorialLobby_1_1.ogg",
+    "https://static.wikitide.net/bluearchivewiki/2/2b/Shiroko%EF%BC%8ATerror_MemorialLobby_1_2.ogg",
+    "https://static.wikitide.net/bluearchivewiki/1/1d/Shiroko%EF%BC%8ATerror_Relationship_Up_1.ogg",
+    "https://static.wikitide.net/bluearchivewiki/7/7b/Shiroko%EF%BC%8ATerror_MemorialLobby_5.ogg",
+    "https://static.wikitide.net/bluearchivewiki/2/28/Shiroko%EF%BC%8ATerror_Cafe_monolog_2.ogg",
+    "https://static.wikitide.net/bluearchivewiki/a/a1/Shiroko%EF%BC%8ATerror_Cafe_monolog_3.ogg"
   ];
 
   const subtitles = [
-    {jp:"メリークリスマス。今日は特別な日なんだって。どういう風に特別なのか わからないけど…先生、教えてくれない？。",en:"Merry Christmas. I've heard that today is a special day. Though, I don't know why it's special...Will you teach me, Sensei?",id:"Selamat Hari Natal, aku dengar hari ini hari yang istimewa, meski aku tidak tahu kenapa… maukah Sensei mengajariku?"},
-    {jp:"ようこそ、先生。今日もよろしく。",en:"Welcome, Sensei. It's good to see you again.",id:"Selamat datang, Sensei. Senang bertemu denganmu lagi."},
-    {jp:"先生を手伝うために ここにいるよ。",en:"I'm here to help, Sensei.",id:"Aku di sini untuk membantumu, Sensei."},
-    {jp:"何でそんなにじーっと見てるの？",en:"Why is Sensei staring at me like that?",id:"Kenapa Sensei menatapku seperti itu?"},
-    {jp:"おかしい。ドキドキが止まらない。",en:"It's strange... My heart is pounding.",id:"Aneh… hatiku berdebar kencang."},
-    {jp:"先生。教えて。私の知らない、色んなことを、もっと……",en:"Sensei, tell me more things I don't know.",id:"Sensei, ceritakan lebih banyak hal yang belum kuketahui."},
-    {jp:"先生に会ったその瞬間から……ここは私にとってもっと特別な場所になった。",en:"From that moment I met Sensei, this place became more special to me.",id:"Sejak saat aku bertemu Sensei, tempat ini menjadi lebih istimewa bagiku."},
-    {jp:"ありがとう、先生。",en:"Thank you, Sensei.",id:"Terima kasih, Sensei."}
+    {
+      jp: "あけましておめでとう、先生。また新しい一年が始まるね。先生の今年の目標は？",
+      en: "Happy New Year, Sensei. Another year is starting. What are your goals for this year?",
+      id: "Selamat Tahun Baru, Sensei. Tahun baru kembali dimulai. Apa target Sensei tahun ini?"
+    },
+    {
+      jp: "忙しそうだけど…手伝おうか？",
+      en: "You look busy... Need some help?",
+      id: "Kelihatannya kamu sibuk… mau aku bantu?"
+    },
+    {
+      jp: "ん、待ってたよ、先生。仕事が終わるまで、帰さないから。",
+      en: "I've been waiting for you, Sensei. I won't let you go until the job is done.",
+      id: "Hm, aku sudah menunggumu, Sensei. Aku tidak akan membiarkanmu pulang sampai pekerjaannya selesai."
+    },
+    {
+      jp: "何でそんなにじーっと見てるの…？ん、睨めっこ対決、受けて立つ。",
+      en: "Why are you staring at me for that long...? A staring contest, huh? You're on.",
+      id: "Kenapa kamu menatapku terus begitu…? Hm, adu tatapan ya? Aku terima tantangannya."
+    },
+    {
+      jp: "…いつも通りだね、ここは。",
+      en: "This place is still the same.",
+      id: "…Tempat ini tetap sama seperti biasanya."
+    }
+    {
+      jp: "変わったのは、私だけか。",
+      en: "I guess I'm the only one who has changed.",
+      id: "Sepertinya hanya aku saja yang berubah."
+    },
+    {
+      jp: "先生、肩……貸して。",
+      en: "Sensei... Lend me your shoulder.",
+      id: "Sensei… boleh pinjam bahumu?"
+    },
+    {
+      jp: "ん、ありがとう。先生。",
+      en: "Mm. Thank you, Sensei.",
+      id: "Hm, terima kasih, Sensei."
+    },
+    {
+      jp: "平和だね、ここは。",
+      en: "Peaceful here, isn't it?",
+      id: "Damai ya, di sini."
+    },
+    {
+      jp: "ん、休憩しようかな。",
+      en: "I think I'll take a break.",
+      id: "Hm, sepertinya aku akan istirahat sebentar."
+    }
   ];
 
   let index = 0;
