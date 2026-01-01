@@ -2,7 +2,7 @@
   document.body.insertAdjacentHTML("afterbegin", `
   <div style="position:fixed; inset:0; overflow:hidden; z-index:-1;">
     <video autoplay muted loop playsinline style="width:100vw; height:100vh; object-fit:cover; object-position:center center;">
-      <source src="https://moewalls.com/wp-content/uploads/preview/2025/e8881ebfdd2753515834781b896ff905344d90ca.webm" type="video/webm">
+      <source src="https://moewalls.com/wp-content/uploads/preview/2024/shiroko-cyclist-blue-archive-preview.webm" type="video/webm">
     </video>
   </div>
   `);
