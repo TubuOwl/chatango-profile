@@ -21,7 +21,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   const raw=navigator.userAgent+screen.width+screen.height+canvasFP();
   const deviceID=await hash(raw);
 
-  fetch("https://device-check-eight.vercel.app/api/check",{
+  fetch("https://device-check-gamma.vercel.app/api/check",{
     method:"POST",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify({
