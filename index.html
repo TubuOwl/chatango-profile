@@ -46,10 +46,11 @@
     .char-girl {
       position: absolute;
       bottom: 0;
-      right: -350px;
-      height: 90%;
-      max-height: 450px;
+      right: -100vw;
+      height: 100vh;
+      max-height: none;
       object-fit: contain;
+      object-position: bottom;
       filter: drop-shadow(-6px 0 20px rgba(0,0,0,0.7));
       animation: slideFromRight 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.8s forwards;
       z-index: 1;
@@ -58,10 +59,11 @@
     .char-boy {
       position: absolute;
       bottom: 0;
-      left: -350px;
-      height: 90%;
-      max-height: 450px;
+      left: -100vw;
+      height: 100vh;
+      max-height: none;
       object-fit: contain;
+      object-position: bottom;
       filter: drop-shadow(6px 0 20px rgba(0,0,0,0.7));
       animation: slideFromLeft 1.2s cubic-bezier(0.22, 1, 0.36, 1) 1.0s forwards;
       z-index: 1;
@@ -375,10 +377,10 @@
       to { opacity: 1; }
     }
     @keyframes slideFromLeft {
-      to { left: 4%; }
+      to { left: -2vw; }
     }
     @keyframes slideFromRight {
-      to { right: 4%; }
+      to { right: -2vw; }
     }
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateX(-50%) translateY(12px); }
@@ -520,14 +522,14 @@
 
     if (girl && girl.style.display !== 'none') {
       girl.style.animation = 'none';
-      girl.style.right = '-350px';
+      girl.style.right = '-100vw';
       void girl.offsetWidth;
       girl.style.animation = 'slideFromRight 1.2s cubic-bezier(0.22,1,0.36,1) 0.8s forwards';
     }
 
     if (boy && boy.style.display !== 'none') {
       boy.style.animation = 'none';
-      boy.style.left = '-350px';
+      boy.style.left = '-100vw';
       void boy.offsetWidth;
       boy.style.animation = 'slideFromLeft 1.2s cubic-bezier(0.22,1,0.36,1) 1.0s forwards';
     }
