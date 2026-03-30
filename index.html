@@ -45,26 +45,24 @@
     /* ── Characters ── */
     .char-girl {
       position: absolute;
-      bottom: 0;
-      right: -100vw;
+      top: 0;
+      left: 110vw;
       object-fit: contain;
-      object-position: bottom center;
+      object-position: top left;
       filter: drop-shadow(-6px 0 20px rgba(0,0,0,0.7));
       animation: slideFromRight 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.8s forwards;
       z-index: 1;
-      transform-origin: bottom center;
     }
 
     .char-boy {
       position: absolute;
-      bottom: 0;
-      left: -100vw;
+      top: 0;
+      left: -110vw;
       object-fit: contain;
-      object-position: bottom center;
+      object-position: top left;
       filter: drop-shadow(6px 0 20px rgba(0,0,0,0.7));
       animation: slideFromLeft 1.2s cubic-bezier(0.22, 1, 0.36, 1) 1.0s forwards;
       z-index: 1;
-      transform-origin: bottom center;
     }
 
     /* ── Title ── */
@@ -378,7 +376,7 @@
       to { left: var(--boy-final-left, 0px); }
     }
     @keyframes slideFromRight {
-      to { right: var(--girl-final-right, 0px); }
+      to { left: var(--girl-final-left, 60vw); }
     }
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateX(-50%) translateY(12px); }
@@ -520,7 +518,7 @@
 
     if (girl && girl.style.display !== 'none') {
       girl.style.animation = 'none';
-      girl.style.right = '-110vw';
+      girl.style.left = '110vw';
       void girl.offsetWidth;
       girl.style.animation = 'slideFromRight 1.2s cubic-bezier(0.22,1,0.36,1) 0.8s forwards';
     }
@@ -548,48 +546,52 @@
     spawnSparkles();
   }
 
-  // ── Dynamic character fit to match background image ──
-  // BG image: 1400 × 933px, rendered as cover
-  // Girl PNG aligns to the right side of the BG, boy to the left
-  // We scale & position the overlay PNGs to sit exactly on the BG characters
+  // ── Precise character overlay fitting ──
+  // Background: 1400×933. Character PNGs sliced FROM the same image.
+  // Girl PNG: 518×703 — sliced from RIGHT side of bg (x=882, y=230, w=518, h=703)
+  // Boy PNG:  477×703 — sliced from LEFT side of bg  (x=0,   y=230, w=477, h=703)
+  // These pixel coords were measured from the source image.
   const BG_W = 1400, BG_H = 933;
-
-  // These fractions describe where each character sits inside the background image.
-  // Adjust if characters look off.
-  // Girl: her PNG covers ~right 37% of bg width, height ~100% of bg
-  // Boy:  his PNG covers ~left 34% of bg width, height ~100% of bg
-  const GIRL = { widthFrac: 0.37, rightFrac: 0.0, heightFrac: 1.0 };
-  const BOY  = { widthFrac: 0.34, leftFrac:  0.0, heightFrac: 1.0 };
+  const GIRL_SLICE = { x: 882, y: 230, w: 518, h: 703 };
+  const BOY_SLICE  = { x: 0,   y: 230, w: 477, h: 703 };
 
   function fitCharacters() {
     const sw = window.innerWidth;
     const sh = window.innerHeight;
 
-    // Scale factor for bg-cover
+    // bg-cover scale
     const scale = Math.max(sw / BG_W, sh / BG_H);
-    const rW = BG_W * scale; // rendered bg width
-    const rH = BG_H * scale; // rendered bg height
-    const ox = (sw - rW) / 2; // horizontal offset (negative = overflow)
-    const oy = (sh - rH) / 2; // vertical offset
+    const rW = BG_W * scale;
+    const rH = BG_H * scale;
+    const ox = (sw - rW) / 2; // can be negative (overflow)
+    const oy = (sh - rH) / 2;
 
     const girl = document.getElementById('charGirl');
     const boy  = document.getElementById('charBoy');
 
+    // Girl: positioned by left
     if (girl && girl.style.display !== 'none') {
-      const gW = rW * GIRL.widthFrac;
-      const gH = rH * GIRL.heightFrac;
-      const gRight = ox < 0 ? -ox : 0; // compensate for bg overflow
+      const gW = GIRL_SLICE.w * scale;
+      const gH = GIRL_SLICE.h * scale;
+      const gLeft = ox + GIRL_SLICE.x * scale;
+      const gTop  = oy + GIRL_SLICE.y * scale;
       girl.style.width  = gW + 'px';
       girl.style.height = gH + 'px';
-      document.documentElement.style.setProperty('--girl-final-right', gRight + 'px');
+      girl.style.top    = gTop + 'px';
+      girl.style.bottom = 'auto';
+      document.documentElement.style.setProperty('--girl-final-left', gLeft + 'px');
     }
 
+    // Boy: positioned from LEFT edge
     if (boy && boy.style.display !== 'none') {
-      const bW = rW * BOY.widthFrac;
-      const bH = rH * BOY.heightFrac;
-      const bLeft = ox < 0 ? -ox : 0;
-      boy.style.width  = bW + 'px';
-      boy.style.height = bH + 'px';
+      const bW = BOY_SLICE.w * scale;
+      const bH = BOY_SLICE.h * scale;
+      const bLeft = ox + BOY_SLICE.x * scale;
+      const bTop  = oy + BOY_SLICE.y * scale;
+      boy.style.width    = bW + 'px';
+      boy.style.height   = bH + 'px';
+      boy.style.top      = bTop + 'px';
+      boy.style.bottom   = 'auto';
       document.documentElement.style.setProperty('--boy-final-left', bLeft + 'px');
     }
   }
