@@ -50,7 +50,9 @@
       object-fit: contain;
       object-position: top left;
       filter: drop-shadow(-6px 0 20px rgba(0,0,0,0.7));
-      animation: slideFromRight 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.8s forwards;
+      opacity: 0;
+      animation: slideFromRight 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.8s forwards,
+                 girlFadeInOut 7s ease 0.8s forwards;
       z-index: 1;
     }
 
@@ -265,9 +267,6 @@
 
     /* ── Friend List Window ── */
     .floating-window {
-      position: absolute;
-      bottom: 52px;
-      left: 16px;
       width: 190px;
       background: rgba(10, 8, 22, 0.82);
       border: 1px solid rgba(255, 210, 150, 0.22);
@@ -275,10 +274,10 @@
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       box-shadow: 0 8px 32px rgba(0,0,0,0.6);
-      z-index: 30;
       overflow: hidden;
       display: none;
       animation: slideUpFade 0.25s ease forwards;
+      flex-shrink: 0;
     }
     .floating-window.visible { display: block; }
 
@@ -349,24 +348,100 @@
       letter-spacing: 0.3px;
     }
 
-    /* ── Show Friend Button (bottom-left) ── */
-    #showFriendBtn {
+    /* ── Left panel (windows + buttons stacked) ── */
+    .left-panel {
       position: absolute;
       bottom: 16px;
       left: 16px;
+      z-index: 30;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    /* windows row — side by side */
+    .windows-row {
+      display: flex;
+      flex-direction: row;
+      gap: 8px;
+      align-items: flex-end;
+    }
+
+    /* buttons row */
+    .btn-row {
+      display: flex;
+      flex-direction: row;
+      gap: 6px;
+    }
+    .btn-row button {
       background: rgba(255,255,255,0.1);
       border: 1px solid rgba(255,255,255,0.3);
       color: white;
-      padding: 6px 13px;
       border-radius: 20px;
       font-size: 11px;
       cursor: pointer;
       letter-spacing: 1px;
       transition: background 0.2s;
-      z-index: 20;
       font-family: 'Lato', sans-serif;
+      padding: 6px 13px;
+      white-space: nowrap;
     }
-    #showFriendBtn:hover { background: rgba(255,255,255,0.25); }
+    .btn-row button:hover { background: rgba(255,255,255,0.25); }
+
+    /* ── Chat Window ── */
+    .chat-window {
+      width: 250px;
+      height: 350px;
+      background: rgba(10, 8, 22, 0.82);
+      border: 1px solid rgba(255, 210, 150, 0.22);
+      border-radius: 12px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+      overflow: hidden;
+      display: none;
+      animation: slideUpFade 0.25s ease forwards;
+      flex-shrink: 0;
+    }
+    .chat-window.visible { display: block; }
+
+    .chat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 12px;
+      background: rgba(255, 210, 150, 0.08);
+      border-bottom: 1px solid rgba(255,210,150,0.15);
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: rgba(255, 210, 150, 0.9);
+      text-transform: uppercase;
+    }
+    .chat-header button {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.4);
+      font-size: 11px;
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    .chat-header button:hover { color: rgba(255,255,255,0.9); }
+
+    .chat-body {
+      width: 100%;
+      height: calc(100% - 33px);
+      overflow: hidden;
+    }
+    .chat-body iframe,
+    .chat-body > * {
+      width: 100% !important;
+      height: 100% !important;
+      border: none;
+    }
 
     /* ── Keyframes ── */
     @keyframes bgFadeIn {
@@ -377,6 +452,12 @@
     }
     @keyframes slideFromRight {
       to { left: var(--girl-final-left, 60vw); }
+    }
+    @keyframes girlFadeInOut {
+      0%   { opacity: 0; }
+      15%  { opacity: 1; }   /* fade in selesai */
+      75%  { opacity: 1; }   /* diam lebih lama */
+      100% { opacity: 0; }   /* fade out menghilang */
     }
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateX(-50%) translateY(12px); }
@@ -450,27 +531,43 @@
     <button onclick="replay()">↺ Replay</button>
   </div>
 
-  <!-- Friend List floating window -->
-  <div class="floating-window" id="friendWindow">
-    <div class="floating-header">
-      <span>Friends</span>
-      <button onclick="hideFriendWindow()">✖</button>
+  <!-- Left panel: windows + buttons in one flex column -->
+  <div class="left-panel">
+    <!-- Windows row: friend list + chat side by side -->
+    <div class="windows-row">
+      <div class="floating-window" id="friendWindow">
+        <div class="floating-header">
+          <span>Friends</span>
+          <button onclick="hideFriendWindow()">✖</button>
+        </div>
+        <div id="friendList">
+          <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/t/u/tubu/thumb_m.jpg" alt="Tubu" referrerpolicy="no-referrer"><span>Tubu</span></div>
+          <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/a/g/agung/thumb_m.jpg" alt="Agung" referrerpolicy="no-referrer"><span>Agung</span></div>
+          <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/c/h/cheese/thumb_m.jpg" alt="Cheese" referrerpolicy="no-referrer"><span>Cheese</span></div>
+          <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/e/g/eg/thumb_m.jpg" alt="Eg" referrerpolicy="no-referrer"><span>Eg</span></div>
+          <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/v/f/vf/thumb_m.jpg" alt="Vf" referrerpolicy="no-referrer"><span>Vf</span></div>
+          <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/k/i/kingbael/thumb_m.jpg" alt="kingbael" referrerpolicy="no-referrer"><span>Kingbael</span></div>
+          <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/u/l/ulnuh/thumb_m.jpg" alt="Ulnuh" referrerpolicy="no-referrer"><span>Ulnuh</span></div>
+          <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/p/a/patrick/thumb_m.jpg" alt="Patrick" referrerpolicy="no-referrer"><span>Patrick</span></div>
+          <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/l/u/lukimukti/thumb_m.jpg" alt="Lukimukti" referrerpolicy="no-referrer"><span>Lukimukti</span></div>
+        </div>
+      </div>
+
+      <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+          <span>💬 Chat</span>
+          <button onclick="hideChatWindow()">✖</button>
+        </div>
+        <div class="chat-body" id="chatBody"></div>
+      </div>
     </div>
-    <div id="friendList">
-      <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/t/u/tubu/thumb_m.jpg" alt="Tubu" referrerpolicy="no-referrer"><span>Tubu</span></div>
-      <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/a/g/agung/thumb_m.jpg" alt="Agung" referrerpolicy="no-referrer"><span>Agung</span></div>
-      <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/c/h/cheese/thumb_m.jpg" alt="Cheese" referrerpolicy="no-referrer"><span>Cheese</span></div>
-      <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/e/g/eg/thumb_m.jpg" alt="Eg" referrerpolicy="no-referrer"><span>Eg</span></div>
-      <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/v/f/vf/thumb_m.jpg" alt="Vf" referrerpolicy="no-referrer"><span>Vf</span></div>
-      <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/k/i/kingbael/thumb_m.jpg" alt="kingbael" referrerpolicy="no-referrer"><span>Kingbael</span></div>
-      <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/u/l/ulnuh/thumb_m.jpg" alt="Ulnuh" referrerpolicy="no-referrer"><span>Ulnuh</span></div>
-      <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/p/a/patrick/thumb_m.jpg" alt="Patrick" referrerpolicy="no-referrer"><span>Patrick</span></div>
-      <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/l/u/lukimukti/thumb_m.jpg" alt="Lukimukti" referrerpolicy="no-referrer"><span>Lukimukti</span></div>
+
+    <!-- Buttons row -->
+    <div class="btn-row">
+      <button id="showFriendBtn" onclick="showFriendWindow()">👥 Friends</button>
+      <button id="showChatBtn" onclick="showChatWindow()">💬 Chat</button>
     </div>
   </div>
-
-  <!-- Bottom-left: Show Friends -->
-  <button id="showFriendBtn" onclick="showFriendWindow()">👥 Friends</button>
 </div>
 
 <script>
@@ -519,8 +616,9 @@
     if (girl && girl.style.display !== 'none') {
       girl.style.animation = 'none';
       girl.style.left = '110vw';
+      girl.style.opacity = '0';
       void girl.offsetWidth;
-      girl.style.animation = 'slideFromRight 1.2s cubic-bezier(0.22,1,0.36,1) 0.8s forwards';
+      girl.style.animation = 'slideFromRight 1.2s cubic-bezier(0.22,1,0.36,1) 0.8s forwards, girlFadeInOut 7s ease 0.8s forwards';
     }
 
     if (boy && boy.style.display !== 'none') {
@@ -641,16 +739,38 @@
   function showFriendWindow() {
     const fw = document.getElementById('friendWindow');
     fw.classList.add('visible');
-    // re-trigger animation
     fw.style.animation = 'none';
     void fw.offsetWidth;
     fw.style.animation = 'slideUpFade 0.25s ease forwards';
-    document.getElementById('showFriendBtn').style.display = 'none';
   }
 
   function hideFriendWindow() {
     document.getElementById('friendWindow').classList.remove('visible');
-    document.getElementById('showFriendBtn').style.display = '';
+  }
+
+  let chatLoaded = false;
+  function showChatWindow() {
+    const cw = document.getElementById('chatWindow');
+    cw.classList.add('visible');
+    cw.style.animation = 'none';
+    void cw.offsetWidth;
+    cw.style.animation = 'slideUpFade 0.25s ease forwards';
+    if (!chatLoaded) {
+      chatLoaded = true;
+      const body = document.getElementById('chatBody');
+      const s = document.createElement('script');
+      s.id = 'cid0020000435895922729';
+      s.setAttribute('data-cfasync', 'false');
+      s.async = true;
+      s.src = '//st.chatango.com/js/gz/emb.js';
+      s.style.cssText = 'width:250px;height:317px;';
+      s.textContent = JSON.stringify({"handle":"nico-nico","arch":"js","styles":{"a":"383838","b":100,"c":"FFFFFF","d":"FFFFFF","k":"383838","l":"383838","m":"383838","n":"FFFFFF","q":"383838","r":100,"fwtickm":1}});
+      body.appendChild(s);
+    }
+  }
+
+  function hideChatWindow() {
+    document.getElementById('chatWindow').classList.remove('visible');
   }
 </script>
 
