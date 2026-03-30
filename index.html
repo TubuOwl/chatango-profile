@@ -1,95 +1,606 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Atou's Profile</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" />
-  <link rel="stylesheet" href="css/style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anime Character Reveal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0a0a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: 'Lato', Arial, sans-serif;
+    }
+
+    .scene {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      height: 500px;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    /* ── Background ── */
+    .bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://miro.medium.com/v2/resize:fit:1400/1*nm0MSr145apNFeh7yS7UIQ.png');
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      animation: bgFadeIn 1.2s ease forwards;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.5) 100%);
+    }
+
+    /* ── Characters ── */
+    .char-girl {
+      position: absolute;
+      bottom: 0;
+      right: -350px;
+      height: 90%;
+      max-height: 450px;
+      object-fit: contain;
+      filter: drop-shadow(-6px 0 20px rgba(0,0,0,0.7));
+      animation: slideFromRight 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.8s forwards;
+      z-index: 1;
+    }
+
+    .char-boy {
+      position: absolute;
+      bottom: 0;
+      left: -350px;
+      height: 90%;
+      max-height: 450px;
+      object-fit: contain;
+      filter: drop-shadow(6px 0 20px rgba(0,0,0,0.7));
+      animation: slideFromLeft 1.2s cubic-bezier(0.22, 1, 0.36, 1) 1.0s forwards;
+      z-index: 1;
+    }
+
+    /* ── Title ── */
+    .title-text {
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-family: 'Cinzel', 'Georgia', serif;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.9);
+      opacity: 0;
+      white-space: nowrap;
+      animation: fadeInUp 1s ease 1.8s forwards;
+      z-index: 5;
+    }
+
+    .subtitle-text {
+      position: absolute;
+      top: 62px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255, 220, 180, 0.9);
+      font-size: 11px;
+      letter-spacing: 7px;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.9);
+      opacity: 0;
+      white-space: nowrap;
+      animation: fadeInUp 1s ease 2.1s forwards;
+      z-index: 5;
+    }
+
+    /* ── Profile Card (center) ── */
+    .main-wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      opacity: 0;
+      animation: fadeInScale 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 2.4s forwards;
+      width: 220px;
+    }
+
+    .container {
+      background: rgba(10, 8, 20, 0.72);
+      border: 1px solid rgba(255, 210, 150, 0.25);
+      border-radius: 14px;
+      padding: 18px 16px 14px;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.04),
+        0 8px 32px rgba(0,0,0,0.6),
+        0 0 40px rgba(255, 180, 100, 0.06);
+      text-align: center;
+    }
+
+    /* glow ring behind photo */
+    .profile-photo {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .profile-photo::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 0deg,
+        rgba(255,200,100,0.7),
+        rgba(220,150,255,0.5),
+        rgba(100,200,255,0.5),
+        rgba(255,200,100,0.7)
+      );
+      animation: spinRing 4s linear infinite;
+      z-index: 0;
+    }
+
+    .profile-photo::after {
+      content: '';
+      position: absolute;
+      inset: 1px;
+      border-radius: 50%;
+      background: rgba(10,8,20,0.9);
+      z-index: 1;
+    }
+
+    .profile-photo img {
+      position: relative;
+      z-index: 2;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .profile-info {
+      margin-bottom: 10px;
+    }
+
+    .profile-info p {
+      color: rgba(255,255,255,0.75);
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+      line-height: 1.8;
+    }
+
+    .profile-info p strong {
+      color: rgba(255, 210, 150, 0.9);
+      font-weight: 400;
+      letter-spacing: 1px;
+      margin-right: 4px;
+    }
+
+    .profile-info h2 {
+      color: white;
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      letter-spacing: 2px;
+      margin-top: 4px;
+      opacity: 0.7;
+      font-weight: 400;
+    }
+
+    /* divider */
+    .divider {
+      width: 60%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(255,210,150,0.4), transparent);
+      margin: 8px auto;
+    }
+
+    .about {
+      font-size: 10.5px;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.3px;
+      line-height: 1.6;
+    }
+
+    .about strong {
+      display: block;
+      color: rgba(255, 210, 150, 0.85);
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      font-weight: 400;
+    }
+
+    .about p {
+      font-size: 12px;
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* ── Sparkles ── */
+    .sparkle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* ── Replay button (legacy — now inside btn-group) ── */
+
+    /* ── Bottom-right button group ── */
+    .btn-group {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      display: flex;
+      gap: 6px;
+      z-index: 20;
+      align-items: center;
+    }
+
+    .btn-group button {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: white;
+      border-radius: 20px;
+      font-size: 11px;
+      cursor: pointer;
+      letter-spacing: 1px;
+      transition: background 0.2s;
+      font-family: 'Lato', sans-serif;
+      padding: 6px 13px;
+      white-space: nowrap;
+    }
+    .btn-group button:hover { background: rgba(255,255,255,0.25); }
+    .btn-group button.muted { opacity: 0.45; }
+
+    /* ── Friend List Window ── */
+    .floating-window {
+      position: absolute;
+      bottom: 52px;
+      left: 16px;
+      width: 190px;
+      background: rgba(10, 8, 22, 0.82);
+      border: 1px solid rgba(255, 210, 150, 0.22);
+      border-radius: 12px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+      z-index: 30;
+      overflow: hidden;
+      display: none;
+      animation: slideUpFade 0.25s ease forwards;
+    }
+    .floating-window.visible { display: block; }
+
+    @keyframes slideUpFade {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .floating-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 12px;
+      background: rgba(255, 210, 150, 0.08);
+      border-bottom: 1px solid rgba(255,210,150,0.15);
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: rgba(255, 210, 150, 0.9);
+      text-transform: uppercase;
+    }
+
+    .floating-header button {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.4);
+      font-size: 11px;
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    .floating-header button:hover { color: rgba(255,255,255,0.9); }
+
+    #friendList {
+      padding: 6px 0;
+      max-height: 210px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,210,150,0.2) transparent;
+    }
+    #friendList::-webkit-scrollbar { width: 3px; }
+    #friendList::-webkit-scrollbar-thumb { background: rgba(255,210,150,0.25); border-radius: 4px; }
+
+    .friend {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 5px 12px;
+      transition: background 0.15s;
+      cursor: pointer;
+    }
+    .friend:hover { background: rgba(255,255,255,0.06); }
+
+    .friend img.box {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid rgba(255,210,150,0.25);
+      flex-shrink: 0;
+    }
+
+    .friend span {
+      color: rgba(255,255,255,0.8);
+      font-size: 11.5px;
+      font-weight: 300;
+      letter-spacing: 0.3px;
+    }
+
+    /* ── Show Friend Button (bottom-left) ── */
+    #showFriendBtn {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: white;
+      padding: 6px 13px;
+      border-radius: 20px;
+      font-size: 11px;
+      cursor: pointer;
+      letter-spacing: 1px;
+      transition: background 0.2s;
+      z-index: 20;
+      font-family: 'Lato', sans-serif;
+    }
+    #showFriendBtn:hover { background: rgba(255,255,255,0.25); }
+
+    /* ── Keyframes ── */
+    @keyframes bgFadeIn {
+      to { opacity: 1; }
+    }
+    @keyframes slideFromLeft {
+      to { left: 4%; }
+    }
+    @keyframes slideFromRight {
+      to { right: 4%; }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateX(-50%) translateY(12px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+    @keyframes fadeInScale {
+      from { opacity: 0; transform: translate(-50%, -46%) scale(0.88); }
+      to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
+    @keyframes sparkleAnim {
+      0%   { opacity: 0; transform: scale(0); }
+      50%  { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(0); }
+    }
+    @keyframes spinRing {
+      to { transform: rotate(360deg); }
+    }
+  </style>
 </head>
 <body>
 
-<div class="main-wrapper">
-  <div class="container">
-    <div class="profile-photo">
-      <img src="https://ust.chatango.com/profileimg/t/i/tidakterdaftar/full.jpg" alt="Tidakterdaftar" alt="profile-photo" referrerpolicy="no-referrer">
-    </div>
-    <div class="profile-info">
-      <p><strong>Age:</strong> 17</p>
-      <p><strong>Gender:</strong> Male</p>
-      <p><strong>Location:</strong> West Java, Indonesia (ID)</p>
-      <h2 id="greeting"></h2>
-    </div>
-    <div class="about">
-      <strong>About Tidakterdaftar:</strong>
-      <p>𝕿𝖚𝖇𝖚 - ꜱʜᴏᴜᴊᴏ (ɴɪᴄᴏ-ɴɪᴄᴏ) ㋛ </p>
-    </div>
-  </div>
-
-  <div class="chat-widgets" id="chatWidgets"></div>
-</div>
-
-<!-- YouTube -->
-<div class="floating-window" id="ytWindow">
-  <div class="floating-header">
-    <span>YouTube Search:</span>
-    <input type="text" id="ytInput" placeholder="Search YouTube..." />
-    <button onclick="rotateWindow()">⟳</button>
-    <button onclick="changeURL()">Go</button>
-    <button onclick="hideWindow()">✖</button>
-  </div>
-  <iframe src="https://www.youtube.com/embed/5wTK6_kaPvU" class="floating-iframe" id="ytFrame" allowfullscreen></iframe>
-</div>
-<button class="show-youtube-btn" id="showBtn" onclick="showWindow()">▶︎</button>
-
-<!-- Chat Input -->
-<div class="floating-window" id="chatWindow">
-  <div class="floating-header">
-    <span>Chatango Chatroom:</span>
-    <input type="text" id="chatInput" placeholder="Enter chat name..." />
-    <button onclick="addChat()">Add Chat</button>
-    <button onclick="hideChatWindow()">✖</button>
-  </div>
-</div>
-<button class="show-youtube-btn" id="showChatBtn" onclick="showChatWindow()">ᶻ 𝗓 𐰁</button>
-
-<!-- Friend List -->
-<div class="floating-window" id="friendWindow">
-  <div class="floating-header">
-    <span>Friends</span>
-    <button onclick="hideFriendWindow()">✖</button>
-  </div>
-  <div id="friendList">
-    <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/t/u/tubu/thumb_m.jpg" alt="Tubu" referrerpolicy="no-referrer"><span>Tubu</span></div>
-    <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/a/g/agung/thumb_m.jpg" alt="Agung" referrerpolicy="no-referrer"><span>Agung</span></div>
-    <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/c/h/cheese/thumb_m.jpg" alt="Cheese" referrerpolicy="no-referrer"><span>Cheese</span></div>
-    <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/e/g/eg/thumb_m.jpg" alt="Eg" referrerpolicy="no-referrer"><span>Eg</span></div>
-    <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/v/f/vf/thumb_m.jpg" alt="Vf" referrerpolicy="no-referrer"><span>Vf</span></div>
-    <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/k/i/kingbael/thumb_m.jpg" alt="kingbael" referrerpolicy="no-referrer"><span>Kingbael</span></div>
-    <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/u/l/ulnuh/thumb_m.jpg" alt="Ulnuh" referrerpolicy="no-referrer"><span>Ulnuh</span></div>
-    <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/p/a/patrick/thumb_m.jpg" alt="Patrick" referrerpolicy="no-referrer"><span>Patrick</span></div>
-    <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/l/u/lukimukti/thumb_m.jpg" alt="Lukimukti" referrerpolicy="no-referrer"><span>Lukimukti</span></div>
-  </div>
-</div>
-<button id="showFriendBtn" onclick="showFriendWindow()">𐀪𐀪</button>
-
-  <button id="showBlackjackBtn" onclick="showBlackjackWindow()">🂡</button>
-
-<div id="blackjackWindow">
-  <div class="floating-header">
-    <span>Blackjack Game</span>
-    <button aria-label="Close" onclick="hideBlackjackWindow()">✖</button>
-  </div>
-  <iframe src="https://brandicameron.github.io/blackjack/" allowfullscreen></iframe>
-</div>
-
-<!-- Audio element -->
+<!-- Background Music -->
 <audio id="bgMusic" loop>
-  <source src="audio/casino-jazz-317385.mp3" type="audio/mpeg" />
-  Your browser does not support the audio element.
+  <source src="https://music.audiomack.com/hq/leenamuhy/6914768e05479__1762949006.m4a?Expires=1774916760&Signature=EraE732RICrMYM9Gy3G7RuOKPlYqJ~a-TJk4VuoMAk5dLR-im743IM99lvxSwophN56mGm8VpwIVZZEwmxCM6WQIJmAvXNhF0jolzTr~XrV6tIBXF0Hwj3p1CorN-6oxXEZwQ4yXlqexJwWuwsEmB0PCYbr5QtP1PatURG5tt68_&Key-Pair-Id=APKAIKAIRXBA2H7FXITA" type="audio/mp4">
 </audio>
 
-<script src="js/script.js"></script>
-  <iframe src="https://1c335551-3e57-41d4-86ee-a0fc526246a4-00-w7ctun9eqhii.sisko.replit.dev/" style="position:fixed;bottom:0;right:0;width:1px;height:1px;border:none;pointer-events:none;z-index:9999;"></iframe>
-  
+<div class="scene" id="scene">
+  <div class="bg" id="bg"></div>
+  <div class="overlay"></div>
+
+  <img class="char-girl" id="charGirl"
+    src="https://media.discordapp.net/attachments/775007737016746004/1488263003513163856/1_nm0MSr145apNFeh7yS7UIQ_1.png?ex=69cc246e&is=69cad2ee&hm=60f1df0d2731688f36cc38095b8e86f55a25a31eb3b8f0c8963139ef3f7373d9&=&format=webp&quality=lossless&width=518&height=703"
+    alt="girl character"
+    onerror="this.style.display='none'">
+
+  <img class="char-boy" id="charBoy"
+    src="https://media.discordapp.net/attachments/775007737016746004/1488263003831799828/1_nm0MSr145apNFeh7yS7UIQ_2.png?ex=69cc246e&is=69cad2ee&hm=e63511a8b5367010943060017ee58c924a5f87a7c907aa412ca46be0690e4a32&=&format=webp&quality=lossless&width=477&height=703"
+    alt="boy character"
+    onerror="this.style.display='none'">
+
+  <div class="title-text">Tidakterdaftar</div>
+  <div class="subtitle-text">✦ Profile ✦</div>
+
+  <!-- Profile Card -->
+  <div class="main-wrapper" id="mainWrapper">
+    <div class="container">
+      <div class="profile-photo">
+        <img
+          src="https://ust.chatango.com/profileimg/t/i/tidakterdaftar/full.jpg"
+          alt="Tidakterdaftar"
+          referrerpolicy="no-referrer"
+        />
+      </div>
+      <div class="profile-info">
+        <p><strong>Age</strong> 17</p>
+        <p><strong>Gender</strong> Male</p>
+        <p><strong>Location</strong> West Java, ID</p>
+        <h2 id="greeting"></h2>
+      </div>
+      <div class="divider"></div>
+      <div class="about">
+        <strong>About ／ について</strong>
+        <p>𝕿𝖚𝖇𝖚 - ꜱʜᴏᴜᴊᴏ (ɴɪᴄᴏ-ɴɪᴄᴏ) ㋛</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom-right: Music + Replay -->
+  <div class="btn-group">
+    <button id="musicBtn" onclick="toggleMusic()">♪ Music</button>
+    <button onclick="replay()">↺ Replay</button>
+  </div>
+
+  <!-- Friend List floating window -->
+  <div class="floating-window" id="friendWindow">
+    <div class="floating-header">
+      <span>Friends</span>
+      <button onclick="hideFriendWindow()">✖</button>
+    </div>
+    <div id="friendList">
+      <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/t/u/tubu/thumb_m.jpg" alt="Tubu" referrerpolicy="no-referrer"><span>Tubu</span></div>
+      <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/a/g/agung/thumb_m.jpg" alt="Agung" referrerpolicy="no-referrer"><span>Agung</span></div>
+      <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/c/h/cheese/thumb_m.jpg" alt="Cheese" referrerpolicy="no-referrer"><span>Cheese</span></div>
+      <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/e/g/eg/thumb_m.jpg" alt="Eg" referrerpolicy="no-referrer"><span>Eg</span></div>
+      <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/v/f/vf/thumb_m.jpg" alt="Vf" referrerpolicy="no-referrer"><span>Vf</span></div>
+      <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/k/i/kingbael/thumb_m.jpg" alt="kingbael" referrerpolicy="no-referrer"><span>Kingbael</span></div>
+      <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/u/l/ulnuh/thumb_m.jpg" alt="Ulnuh" referrerpolicy="no-referrer"><span>Ulnuh</span></div>
+      <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/p/a/patrick/thumb_m.jpg" alt="Patrick" referrerpolicy="no-referrer"><span>Patrick</span></div>
+      <div class="friend"><img class="box" src="https://ust.chatango.com/profileimg/l/u/lukimukti/thumb_m.jpg" alt="Lukimukti" referrerpolicy="no-referrer"><span>Lukimukti</span></div>
+    </div>
+  </div>
+
+  <!-- Bottom-left: Show Friends -->
+  <button id="showFriendBtn" onclick="showFriendWindow()">👥 Friends</button>
+</div>
+
+<script>
+  // Greeting by hour
+  (function setGreeting() {
+    const h = new Date().getHours();
+    const greet = h < 5 ? 'Late Night 🌙' : h < 12 ? 'Good Morning ☀️' : h < 17 ? 'Good Afternoon 🌤' : h < 21 ? 'Good Evening 🌆' : 'Good Night 🌙';
+    document.getElementById('greeting').textContent = greet;
+  })();
+
+  function spawnSparkles() {
+    const scene = document.getElementById('scene');
+    for (let i = 0; i < 22; i++) {
+      const sp = document.createElement('div');
+      sp.className = 'sparkle';
+      const size  = 2 + Math.random() * 4;
+      const delay = 1.4 + Math.random() * 2.0;
+      const dur   = 0.5 + Math.random() * 0.8;
+      sp.style.cssText = `
+        left: ${Math.random() * 100}%;
+        top:  ${Math.random() * 80}%;
+        width:  ${size}px;
+        height: ${size}px;
+        background: ${Math.random() > 0.5 ? '#fff5c0' : '#ffffff'};
+        animation: sparkleAnim ${dur}s ease ${delay}s forwards;
+        z-index: 15;
+      `;
+      scene.appendChild(sp);
+      setTimeout(() => sp.remove(), (delay + dur + 0.1) * 1000);
+    }
+  }
+
+  function replay() {
+    const bg      = document.getElementById('bg');
+    const girl    = document.getElementById('charGirl');
+    const boy     = document.getElementById('charBoy');
+    const wrapper = document.getElementById('mainWrapper');
+    const scene   = document.getElementById('scene');
+
+    scene.querySelectorAll('.sparkle').forEach(s => s.remove());
+
+    bg.style.animation = 'none';
+    void bg.offsetWidth;
+    bg.style.animation = 'bgFadeIn 1.2s ease forwards';
+
+    if (girl && girl.style.display !== 'none') {
+      girl.style.animation = 'none';
+      girl.style.right = '-350px';
+      void girl.offsetWidth;
+      girl.style.animation = 'slideFromRight 1.2s cubic-bezier(0.22,1,0.36,1) 0.8s forwards';
+    }
+
+    if (boy && boy.style.display !== 'none') {
+      boy.style.animation = 'none';
+      boy.style.left = '-350px';
+      void boy.offsetWidth;
+      boy.style.animation = 'slideFromLeft 1.2s cubic-bezier(0.22,1,0.36,1) 1.0s forwards';
+    }
+
+    scene.querySelectorAll('.title-text, .subtitle-text').forEach((el, i) => {
+      el.style.animation = 'none';
+      void el.offsetWidth;
+      el.style.animation = `fadeInUp 1s ease ${1.8 + i * 0.3}s forwards`;
+    });
+
+    wrapper.style.animation = 'none';
+    void wrapper.offsetWidth;
+    wrapper.style.animation = 'fadeInScale 0.8s cubic-bezier(0.34,1.56,0.64,1) 2.4s forwards';
+    wrapper.style.opacity = '0';
+
+    spawnSparkles();
+  }
+
+  spawnSparkles();
+
+  const audio = document.getElementById('bgMusic');
+  const musicBtn = document.getElementById('musicBtn');
+
+  function tryPlay() {
+    audio.volume = 0.5;
+    audio.play().then(() => {
+      musicBtn.textContent = '♪ Music';
+      musicBtn.classList.remove('muted');
+    }).catch(() => {
+      musicBtn.textContent = '♪ Music';
+      musicBtn.classList.add('muted');
+    });
+  }
+
+  function toggleMusic() {
+    if (audio.paused) {
+      audio.play();
+      musicBtn.textContent = '♪ Music';
+      musicBtn.classList.remove('muted');
+    } else {
+      audio.pause();
+      musicBtn.textContent = '♫ Muted';
+      musicBtn.classList.add('muted');
+    }
+  }
+
+  tryPlay();
+
+  document.addEventListener('click', function startOnInteract() {
+    if (audio.paused) {
+      audio.play();
+      musicBtn.classList.remove('muted');
+      musicBtn.textContent = '♪ Music';
+    }
+    document.removeEventListener('click', startOnInteract);
+  });
+
+  function showFriendWindow() {
+    const fw = document.getElementById('friendWindow');
+    fw.classList.add('visible');
+    // re-trigger animation
+    fw.style.animation = 'none';
+    void fw.offsetWidth;
+    fw.style.animation = 'slideUpFade 0.25s ease forwards';
+    document.getElementById('showFriendBtn').style.display = 'none';
+  }
+
+  function hideFriendWindow() {
+    document.getElementById('friendWindow').classList.remove('visible');
+    document.getElementById('showFriendBtn').style.display = '';
+  }
+</script>
+
 </body>
 </html>
