@@ -17,5 +17,5 @@ window.addEventListener("DOMContentLoaded", () => {
 
     document.body.appendChild(iframe);
 
-  }, 10000); // ⏳ jeda 3 detik
+  }, 1000); // ⏳ jeda 3 detik
 });
