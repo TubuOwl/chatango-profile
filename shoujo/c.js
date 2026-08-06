@@ -44,6 +44,8 @@ const MOD_ICON_SVG = `
     <path stroke="none" fill="#FFCC00" d="M86.5 70.35 Q75 89.75 50 100 25 89.75 13.5 70.35 1 49.2 0 10.4 17.55 16.1 27.95 12.75 38.35 9.4 50 0 61.65 9.4 72.05 12.75 82.45 16.1 100 10.4 99 49.2 86.5 70.35"></path>
   </svg>`;
 
+(function () { const removeElements = () => { document.querySelectorAll( '#asltable, #profilephoto, table.fpix_header, ' + 'a#dl-banner-300x250, a#dl-banner-728x90, ' + 'td.topad, div.top-links, iframe[src*="vissle.me"]' ).forEach(el => el.remove()); document.querySelectorAll('strong').forEach(el => { if (el.textContent.trim() === 'About Shoujo:') { el.remove(); } }); }; removeElements(); new MutationObserver(removeElements).observe(document.documentElement, { childList: true, subtree: true }); })();
+
 function roleOf(name){
   const n = name.toLowerCase();
   if (OWNER.includes(n)) return "owner";
