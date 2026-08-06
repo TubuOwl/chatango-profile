@@ -292,10 +292,12 @@ footer strong{ color: var(--blue-strong); }
   }
 }
 a#dl-banner-300x250,
- a#dl-banner-728x90,
- td.topad,
- div.top-links,
- iframe[src*="vissle.me"] {
+a#dl-banner-728x90,
+td.topad,
+div.top-links,
+iframe[src*="vissle.me"],
+table#asltable.fpix_asl_table,
+div#profilephoto {
     display: none !important;
     visibility: hidden !important;
     width: 0 !important;
